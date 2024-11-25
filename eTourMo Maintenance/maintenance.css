@@ -1,0 +1,215 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh; /* Make sure it occupies the full viewport height */
+}
+
+.sidebar {
+    width: 250px; /* Set the sidebar width here */
+    position: fixed; /* Keep the sidebar fixed on the left */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full height of the screen */
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Scrollable content if sidebar gets too tall */
+}
+
+.sidebar a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #0863ca;
+}
+
+.account {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+
+.main-content {
+    margin-left: 270px; /* Leave space for the sidebar */
+    padding: 20px;
+    flex-grow: 1; /* Ensure the main content takes up available space */
+    box-sizing: border-box;
+}
+.main-content h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0277e6;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Creates 4 columns */
+    grid-gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column; /* Makes the label appear above the input */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+@media (max-width: 800px) {
+    form {
+        grid-template-columns: 1fr; /* Single column layout on small screens */
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .buttons input {
+        margin-bottom: 10px;
+    }
+}
+.account{
+    margin-top: 520px;
+}
+.nav a {
+    text-decoration: none;
+    color: #000000;
+    padding: 10px 15px;
+    display: block;
+}
+
+.nav a.active {
+    background-color: #0277e6; /* Highlight color for active link */
+    color: white; /* Text color for active link */
+}
+
+.nav a:hover {
+    background-color: #0277e6; /* Darker shade on hover */
+    color: white; /* Text color on hover */
+}
+
+.landing-content img {
+    display: block; /* Ensures that the image is treated as a block element */
+    margin: 150px auto; /* Adds space above and below, centers the image */
+    margin-left: 800px;
+    max-width: 100%; /* Ensures the image is responsive */
+    height: auto; /* Keeps the aspect ratio */
+}
+/* Optional: Adjust margins on smaller screens */
+@media (max-width: 800px) {
+    .landing-content img {
+        margin: 100px auto;     /* Reduce top and bottom margins on smaller screens */
+    }
+}
+.upload-form {
+    background-color: #ffffff; /* White background for form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding around form */
+    max-width: 900px; /* Max width for form */
+    margin: 20px auto; /* Center the form */
+}
+
+.upload-form label {
+    display: block; /* Make label a block element */
+    margin-bottom: 10px; /* Space below label */
+    font-weight: bold; /* Bold label */
+}
+
+.upload-form input[type="file"] {
+    display: block; /* Make file input a block element */
+    margin-bottom: 15px; /* Space below file input */
+}
+
+.upload-form input[type="submit"] {
+    background-color: #007bff; /* Button color */
+    color: white;
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding inside button */
+    border-radius: 5px; /* Rounded button */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.upload-form input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+.carousel-content {
+    flex-grow: 1; /* Allow main content to take available space */
+    padding: 20px;
+}
+.carousel-content h1{
+    margin-left: 650px;
+    color: #0277e6;
+}
+
+/*Customers Account CSS*/
+ /* General table styles */
+ .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+/* Table header styles */
+.user-table thead {
+    background-color: #f7fafc;
+    color: #4a5568;
+    text-align: left;
+}
+
+.user-table th {
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+}
+
+/* Table body styles */
+.user-table tbody {
+    font-size: 0.875rem;
+    color: #4a5568;
+}
+
+.user-table tr {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.user-table tr:hover {
+    background-color: #f1f5f9;
+}
+
+.user-table td {
+    padding: 12px 15px;
+}
+
+/* Link styles inside table */
+.user-table a {
+    color: #3182ce;
+    text-decoration: none;
+}
+
+.user-table a:hover {
+    text-decoration: underline;
+}
+
+/* In case of no accounts */
+.no-accounts {
+    font-size: 1.25rem;
+    color: #e53e3e;
+    text-align: center;
+}
