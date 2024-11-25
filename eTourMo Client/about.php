@@ -113,6 +113,20 @@ if (empty($aboutData['organization_info'])) {
             <p><?php echo $aboutData['organization_info']['ceo_message'] ?? "Default CEO message."; ?></p>
         </div>
 
+        <div class="location-container" style="display: flex; justify-content: center; align-items: center;">
+            <div>
+                <h3 style="text-align: center;">Location</h3>
+                <iframe 
+                    width="450" 
+                    height="250" 
+                    frameborder="0" 
+                    style="border:0" 
+                    src="https://www.google.com/maps?q=214+Abacan+Brgy+Calvario,+Meycauayan+City,+Bulacan,+Philippines&output=embed" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
         <div class="service-container">
             <h3>Our Services</h3>
             <?php foreach ($aboutData['services'] as $service): ?>
