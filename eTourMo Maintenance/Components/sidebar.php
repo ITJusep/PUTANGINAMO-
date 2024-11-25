@@ -42,8 +42,8 @@ if ($logged_in_user_id !== 'Guest') {
 <style>
 /* Sidebar Styles */
 .sidebar {
-    width: 220px;
-    background-color: #02203f;
+    max-width: 220px;
+    background-color: #133E87;
     padding: 20px;
     position: fixed;
     height: 100%;
@@ -106,7 +106,7 @@ if ($logged_in_user_id !== 'Guest') {
             <a href="javascript:void(0);" class="<?= ($current_page == 'homepage' || $current_page == 'aboutus' || $current_page == 'privacy_and_terms') ? 'active' : '' ?>">Web Contents</a>
             <div class="submenu">
                 <a href="/eTourMo Maintenance/Web Contents/About Us/aboutus.php" class="<?= ($current_page == 'aboutus') ? 'active' : '' ?>">About Us</a>
-                <a href="/eTourMo Maintenance/Web Contents/Page Backdrop/page_backdrop.php" class="<?= ($current_page == 'page_backdrop') ? 'active' : '' ?>">Page Backdrop</a>
+                <!-- <a href="/eTourMo Maintenance/Web Contents/Page Backdrop/page_backdrop.php" class="<?= ($current_page == 'page_backdrop') ? 'active' : '' ?>">Page Backdrop</a> -->
                 <a href="/eTourMo Maintenance/Web Contents/Privacy and Terms/privacy_and_terms.php" class="<?= ($current_page == 'privacy_and_terms') ? 'active' : '' ?>">Privacy & Terms</a>
             </div>
         </div>

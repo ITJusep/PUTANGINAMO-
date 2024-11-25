@@ -27,19 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['upload'])) {
     $package_duration = $_POST['package_duration'];
     $package_cancellation_policy = $_POST['package_cancellation_policy'];
     $package_itinerary = $_POST['package_itinerary'];
-    $package_category = $_POST['package_category']; // New category field
+    $package_category = $_POST['package_category']; 
+    $package_minimum = $_POST['package_minimum'];
+    // New category field
 
     // Handle Upload Package action
     try {
         // Insert package data into 'packages' table, including the category
         $stmt = $pdo->prepare("INSERT INTO packages (package_name, package_pax, package_location, package_price, 
             package_description, package_inclusion, package_requirements, package_duration, 
-            package_cancellation_policy, package_itinerary, package_category, package_start, package_ends) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)");
+            package_cancellation_policy, package_itinerary, package_category, package_start, package_ends, package_minimum) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?)");
 
         $stmt->execute([$package_name, $package_pax, $package_location, $package_price,
             $package_description, $package_inclusion,
-            $package_requirements,  $package_duration, $package_cancellation_policy, $package_itinerary, $package_category, $package_starts, $package_ends]);
+            $package_requirements,  $package_duration, $package_cancellation_policy, $package_itinerary, $package_category, $package_starts, $package_ends, $package_minimum]);
 
         $package_id = $pdo->lastInsertId(); // Get the last inserted package ID
 
@@ -88,21 +90,24 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include('../../Components/header.php'); ?>
 <!-- Upload Button (on the right side of the screen) -->
  <div class="content">
-<div class="upload-button">
-    <a href="#" id="uploadButton" onclick="openModal()">+</a>
-</div>
 
-<form class="search-form" method="GET" action="">
-    <div class="search-container">
-        <input type="search" id="default-search" name="search" class="search-input" placeholder="Search Package Name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" required />
-        <button type="submit" class="search-button">Search</button>
+ <form class="search-form" method="GET" action="">
+    <div class="join">
+        <div>
+            <div>
+            <input type="search" id="default-search" name="search" class="input input-bordered join-item bg-[#CBDCEB] placeholder-black text-black" placeholder="Search Package Name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info join-item">Search</button>
+        <a href="#" id="uploadButton" onclick="openModal()" class="btn btn-info btn-md join-item bg-[#133E87]">+</a>
     </div>
 </form>
+
 <?php if ($packages): ?>
     <!-- Loop through all packages -->
-    <table class="package-table">  
+    <table class="table table-lg text-black mt-12">  
         <thead>
-            <tr>
+            <tr class="bg-[#608BC1] text-black">
                 <th>Package Name</th>
                 <th>Package Location</th>
                 <th>Package Price</th>
@@ -117,7 +122,7 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $package['package_location']; ?></td>
                     <td><?php echo number_format($package['package_price'], 0, '.', ','); ?></td>
                     <td><?php echo $package['package_category']; ?></td>
-                    <td><a href="/eTourMo Maintenance/Postings/Travel Packages/detail.php?id=<?php echo $package['package_id']; ?>">View</a></td>
+                    <td class="underline"><a href="/eTourMo Maintenance/Postings/Travel Packages/detail.php?id=<?php echo $package['package_id']; ?>">View</a></td>
                 </tr> 
             <?php endforeach; ?> 
         </tbody>
@@ -127,75 +132,80 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php endif; ?>
 
 <!-- Modal for Upload Package Form -->
-<div id="uploadModal" class="modal">
-    <div class="modal-content">
+<div id="uploadModal" class="custom-modal">
+    <div class="modal-content text-black">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Upload Package</h2>
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="package_name">Package Name:</label>
-                <input type="text" name="package_name" required>
+                <input type="text" name="package_name" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_pax">Package Pax:</label>
-                <input type="number" name="package_pax" required>
+                <input type="number" name="package_pax" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_location">Package Location:</label>
-                <input type="text" name="package_location" required>
+                <input type="text" name="package_location" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_price">Package Price:</label>
-                <input type="number" name="package_price" required>
+                <input type="number" name="package_price" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_starts">Package Starts:</label>
-                <input type="date" name="package_start" required>
+                <input type="date" name="package_start" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_ends">Package Ends:</label>
-                <input type="date" name="package_ends" required>
+                <input type="date" name="package_ends" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_description">Package Description:</label>
-                <textarea name="package_description" required></textarea>
+                <textarea name="package_description" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="package_inclusion">Package Inclusion:</label>
-                <textarea name="package_inclusion" required></textarea>
+                <textarea name="package_inclusion" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="package_requirements">Package Requirements:</label>
-                <textarea name="package_requirements" required></textarea>
+                <textarea name="package_requirements" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="package_duration">Package Duration:</label>
-                <input type="text" name="package_duration" required>
+                <input type="text" name="package_duration" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="package_cancellation_policy">Package Cancellation Policy:</label>
-                <textarea name="package_cancellation_policy"></textarea>
+                <textarea name="package_cancellation_policy" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="package_itinerary">Package Itinerary:</label>
-                <textarea name="package_itinerary"></textarea>
+                <textarea name="package_itinerary" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md"></textarea>
+            </div>
+a
+            <div class="form-group">
+                <label for="package_minimum">Minimum Passengers:</label>
+                <input type="number" name="package_minimum" class="input input-bordered w-full bg-[#CBDCEB] text-black" max="100" min="1" required>
             </div>
 
             <!-- Dropdown for Package Category -->
             <div class="form-group">
                 <label for="package_category">Package Category:</label>
-                <select name="package_category" required>
+                <select name="package_category" class="select select-bordered w-full max-full bg-[#CBDCEB] text-black" required>
                     <option value="Local Package">Local Package</option>
                     <option value="International Package">International Package</option>
                     <option value="Educational Package">Educational Package</option>
@@ -204,7 +214,7 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="form-group">
                 <label for="package_images">Package Images:</label>
-                <input type="file" name="package_images[]" multiple accept="image/*">
+                <input type="file" name="package_images[]" multiple accept="image/*" class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" />
             </div>
 
             <div class="button-group">
@@ -219,11 +229,16 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- CSS for Modal -->
 <style>
 /* General page styles */
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    margin-left: 250px;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1000px;
+    padding: 100px;
 }
 
 /* Header */
@@ -233,27 +248,7 @@ h1 {
     font-size: 2em;
 }
 
-/* Upload button */
-.upload-button {
-    text-align: left;
-    margin: 20px;
-    margin-left: 110px;
-}
 
-.upload-button a {
-    display: inline-block;
-    padding: 5px;  /* Adjust padding for smaller button */
-    background-color: #3498db;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 50%;  /* Make the button circular */
-    font-size: 16px;  /* Smaller font size to fit inside the 20px button */
-    text-align: center; /* Ensure the "+" is centered in the circle */
-    width: 40px;  /* Set fixed width for the circle */
-    height: 40px;  /* Set fixed height for the circle */
-    line-height: 40px; /* Vertically center the "+" symbol */
-}
 
 .upload-button a:hover {
     background-color: #2980b9;
@@ -289,7 +284,7 @@ h1 {
 }
 
 /* Modal styles */
-.modal {
+.custom-modal {
     display: none;  /* Ensure modal is hidden by default */
     position: fixed;
     z-index: 1;
@@ -385,6 +380,7 @@ input[type="submit"]:hover {
     max-width: 28rem; /* max-w-md */
     margin: 0 auto;   /* mx-auto */
 }
+
 
 /* Label styling */
 .search-label {

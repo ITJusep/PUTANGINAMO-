@@ -58,14 +58,19 @@ $mysqli->close();
 ?>
 
 <?php include('../Components/header.php'); ?>
-<div class="content">
+<div class="content text-black">
 <!-- Booking Report Table -->
-<div class="booking-report-container">
-    <h1>Reports</h1>
+<h2 class="text-6xl font-bold mb-4">Reports</h2>
+
+<!-- Total Price from All Done Bookings -->
+<div class="total-earned">
+    <h3 class="font-bold text-2xl mb-4">Total Earned From Bookings: <span class="text-green-500">₱<?= number_format($totalPrice, 2) ?></span></h3>
+</div>
+<div class="">
     <div class="table-wrapper">
-        <table class="booking-report-table">
+        <table class="table table-lg">
             <thead>
-                <tr>
+                <tr class="text-white bg-[#608BC1]">
                     <th>Package Name</th>
                     <th>Total Bookings</th>
                     <th>Status</th>
@@ -78,7 +83,7 @@ $mysqli->close();
             </thead>
             <tbody>
                 <?php foreach ($packageBookings as $package): ?>
-                    <tr>
+                    <tr class="">
                         <td><?= htmlspecialchars($package['package_name']) ?></td>
                         <td><?= $package['total_bookings'] ?></td>
                         <td><?= $package['done_bookings'] > 0 ? "Done" : "Not Done" ?></td>
@@ -128,11 +133,6 @@ $mysqli->close();
             </tbody>
         </table>
     </div>
-
-    <!-- Total Price from All Done Bookings -->
-    <div class="total-earned">
-        <h3>Total Earned From Bookings: ₱<?= number_format($totalPrice, 2) ?></h3>
-    </div>
 </div>
 </div>
 
@@ -140,81 +140,10 @@ $mysqli->close();
 
 <!-- Plain CSS Styles -->
 <style>
-/* General Styling */
-.content {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center;    /* Centers vertically */
-    min-height: 100vh;      /* Ensures it takes full viewport height */
-    padding: 0;
-    box-sizing: border-box; /* Includes padding in width/height calculations */
-    margin: 0;
+body {
+    background-color: #F3F3E0;
 }
 
-.booking-report-container {
-    width: 100%;
-    max-width: 1300px; /* Maintain maximum width for larger screens */
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-left: -40px ;
-    margin-top: -150px;
-}
-/* Booking Report Container */
-.booking-report-container h1 {
-    text-align: center;
-    color: #0277e6;
-}
-
-/* Table Wrapper for Horizontal Scrolling */
-.table-wrapper {
-    overflow-x: auto;  /* Enable horizontal scroll for smaller screens */
-}
-
-/* Booking Report Table */
-.booking-report-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-.booking-report-table th,
-.booking-report-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-.booking-report-table th {
-    background-color: #0277e6;
-    color: white;
-}
-
-.booking-report-table td {
-    background-color: #f9f9f9;
-}
-
-.booking-report-table tr:nth-child(even) td {
-    background-color: #f1f1f1;
-}
-
-/* Total Earned Box */
-.total-earned {
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 20px;
-    border: 1px solid #ddd;
-}
-
-h3 {
-    margin: 0;
-    color: #333;
-}
 
 /* Responsive Styles */
 

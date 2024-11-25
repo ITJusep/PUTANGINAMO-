@@ -355,19 +355,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 <?php include('../../Components/header.php'); ?>
-<div class="content">
-<!-- Upload Form Section -->
-<div id="uploadForm" class="upload-form">
+<div class="content py-6">
+    <!-- Upload Form Section -->
+    <div id="uploadForm" class="upload-form">
+    <h2 class="text-6xl font-bold mb-4 text-black mb-4">Update About Us</h2>
     <!-- Company Images Section -->
     <div id="companyImagesForm" class="form-section">
         <!-- Upload and Delete Company Image Form -->
         <form action="" method="POST" enctype="multipart/form-data" class="form">
             <div class="form-group">
-                <input type="file" name="company_images[]" multiple class="input-file" accept="image/jpeg, image/png, image/gif">
+                <input type="file" name="company_images[]" class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" accept="image/jpeg, image/png, image/gif" required>
             </div>
             <div class="form-group">
                 <label for="select_company_image" class="label">Select Company Image to Delete:</label>
-                <select id="select_company_image" name="selected_company_image" class="input-select">
+                <select id="select_company_image" name="selected_company_image" class="select select-bordered w-full max-full bg-[#CBDCEB] text-black">
                     <option value="">Select a company image...</option>
                     <?php
                     // Fetch company images from the database
@@ -381,10 +382,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </select>
             </div>
 
-            <!-- Upload and Delete Buttons -->
-            <div class="button-group">
-                <input type="submit" name="upload_company_images" value="Upload" class="button">
-                <input type="submit" name="delete_company_image" value="Delete" class="button">
+            <!-- Upload and Delete btn-info btns -->
+            <div class="btn-info btn-group">
+                <input type="submit" name="upload_company_images" value="Upload" class="btn-info btn">
+                <input type="submit" name="delete_company_image" value="Delete" class="btn btn-error">
             </div>
         </form>
     </div>
@@ -394,34 +395,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form action="" method="POST" enctype="multipart/form-data" class="form">
             <div class="form-group">
                 <label for="who_we_are" class="label">Who We Are:</label>
-                <textarea name="who_we_are" class="input-textarea" required><?php echo htmlspecialchars($orgInfo['who_we_are']); ?></textarea>
+                <textarea name="who_we_are" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($orgInfo['who_we_are']); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="our_vision" class="label">Our Vision:</label>
-                <textarea name="our_vision" class="input-textarea" required><?php echo htmlspecialchars($orgInfo['our_vision']); ?></textarea>
+                <textarea name="our_vision" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($orgInfo['our_vision']); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="our_mission" class="label">Our Mission:</label>
-                <textarea name="our_mission" class="input-textarea" required><?php echo htmlspecialchars($orgInfo['our_mission']); ?></textarea>
+                <textarea name="our_mission" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($orgInfo['our_mission']); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="ceo_message" class="label">CEO Message:</label>
-                <textarea name="ceo_message" class="input-textarea" required><?php echo htmlspecialchars($orgInfo['ceo_message']); ?></textarea>
+                <textarea name="ceo_message" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($orgInfo['ceo_message']); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="address" class="label">Address:</label>
-                <input type="text" name="address" class="input-text" required value="<?php echo htmlspecialchars($orgInfo['address']); ?>">
+                <input type="text" name="address" class="input input-bordered w-full bg-[#CBDCEB] text-black" required value="<?php echo htmlspecialchars($orgInfo['address']); ?>">
             </div>
             <div class="form-group">
                 <label for="contact_number" class="label">Contact Number:</label>
-                <input type="text" name="contact_number" class="input-text" required value="<?php echo htmlspecialchars($orgInfo['contact_number']); ?>">
+                <input type="text" name="contact_number" class="input input-bordered w-full bg-[#CBDCEB] text-black" required value="<?php echo htmlspecialchars($orgInfo['contact_number']); ?>">
             </div>
             <div class="form-group">
                 <label for="facebook_link" class="label">Facebook Link:</label>
-                <input type="text" name="facebook_link" class="input-text" required value="<?php echo htmlspecialchars($orgInfo['facebook_link']); ?>">
+                <input type="text" name="facebook_link" class="input input-bordered w-full bg-[#CBDCEB] text-black" required value="<?php echo htmlspecialchars($orgInfo['facebook_link']); ?>">
             </div>
-            <div class="button-group">
-                <input type="submit" name="update_organization" value="Update" class="button">
+            <div class="btn-info btn-group">
+                <input type="submit" name="update_organization" value="Update" class="btn-info btn">
             </div>
         </form>
     </div>
@@ -432,11 +433,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form action="" method="POST" enctype="multipart/form-data" class="form">
             <div class="form-group">
                 <label for="certificate_images" class="label">Upload Certificate Images:</label>
-                <input type="file" name="certificate_images[]" multiple class="input-file" accept="image/jpeg, image/png, image/gif">
+                <input type="file" name="certificate_images[]" multiple class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" accept="image/jpeg, image/png, image/gif">
             </div>
             <div class="form-group">
                 <label for="select_certificate" class="label">Select Certificate to Delete:</label>
-                <select id="select_certificate" name="selected_certificate" class="input-select">
+                <select id="select_certificate" name="selected_certificate" class="select select-bordered w-full max-full bg-[#CBDCEB] text-black">
                     <option value="">Select a certificate...</option>
                     <?php
                     // Fetch certificates from the database
@@ -450,10 +451,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </select>
             </div>
 
-            <!-- Upload and Delete Buttons -->
-            <div class="button-group">
-                <input type="submit" name="upload_certificates" value="Upload" class="button">
-                <input type="submit" name="delete_certificate" value="Delete" class="button">
+            <!-- Upload and Delete btn-info btns -->
+            <div class="btn-info btn-group">
+                <input type="submit" name="upload_certificates" value="Upload" class="btn-info btn">
+                <input type="submit" name="delete_certificate" value="Delete" class="btn-error btn">
             </div>
         </form>
     </div>
@@ -464,7 +465,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <!-- Select Service Dropdown -->
             <div class="form-group">
                 <label for="select_service" class="label">Select Service:</label>
-                <select id="select_service" name="selected_service" class="input-select" onchange="this.form.submit()">
+                <select id="select_service" name="selected_service" class="select select-bordered w-full max-full bg-[#CBDCEB] text-black" onchange="this.form.submit()">
                     <option value="">Select a service...</option>
                     <?php foreach ($services as $service): ?>
                         <option value="<?php echo htmlspecialchars($service['services_id']); ?>"
@@ -478,13 +479,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <!-- Service Title -->
             <div class="form-group">
                 <label for="service_title" class="label">Service Title:</label>
-                <input type="text" name="service_title" class="input-text" required value="<?php echo isset($selectedService['services_title']) ? htmlspecialchars($selectedService['services_title']) : ''; ?>">
+                <input type="text" name="service_title" class="input input-bordered w-full bg-[#CBDCEB] text-black" required value="<?php echo isset($selectedService['services_title']) ? htmlspecialchars($selectedService['services_title']) : ''; ?>">
             </div>
 
             <!-- Service Description -->
             <div class="form-group">
                 <label for="service_description" class="label">Service Description:</label>
-                <textarea name="service_description" class="input-textarea" required><?php echo isset($selectedService['services_description']) ? htmlspecialchars($selectedService['services_description']) : ''; ?></textarea>
+                <textarea name="service_description" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo isset($selectedService['services_description']) ? htmlspecialchars($selectedService['services_description']) : ''; ?></textarea>
             </div>
 
             <!-- Service Image (Display existing image if selected) -->
@@ -493,20 +494,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php if (isset($selectedService['services_image']) && $selectedService['services_image']): ?>
                     <div>
                         <img src="data:image/jpeg;base64,<?php echo base64_encode($selectedService['services_image']); ?>" alt="Service Image" style="max-width: 200px; max-height: 200px;">
-                        <div>
-                            <label for="delete_image">Delete Image:</label>
-                            <input type="checkbox" name="delete_image" id="delete_image" value="1">
-                        </div>
                     </div>
                 <?php endif; ?>
-                <input type="file" name="service_image" class="input-file" accept="image/jpeg, image/png, image/gif">
+                <input type="file" name="service_image" class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" accept="image/jpeg, image/png, image/gif" required>
             </div>
 
-            <!-- Submit Buttons -->
-            <div class="button-group">
-                <input type="submit" name="upload_service" value="Upload" class="button">
-                <input type="submit" name="update_service" value="Update" class="button" <?php echo !isset($selectedService) ? 'disabled' : ''; ?>>
-                <input type="submit" name="delete_service" value="Delete" class="button" <?php echo !isset($selectedService) ? 'disabled' : ''; ?>>
+            <!-- Submit btn-info btns -->
+            <div class="btn-info btn-group">
+                <input type="submit" name="upload_service" value="Upload" class="btn-info btn">
+                <input type="submit" name="update_service" value="Update" class="btn-success btn" <?php echo !isset($selectedService) ? 'disabled' : ''; ?>>
+                <input type="submit" name="delete_service" value="Delete" class="btn-error btn" <?php echo !isset($selectedService) ? 'disabled' : ''; ?>>
             </div>
         </form>
     </div>
@@ -516,7 +513,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- Select FAQ Dropdown -->
         <div class="form-group">
             <label for="faq_select" class="label">Select FAQ:</label>
-            <select id="faq_select" name="faq_id" class="input-select" onchange="this.form.submit()">
+            <select id="faq_select" name="faq_id" class="select select-bordered w-full max-full bg-[#CBDCEB] text-black" onchange="this.form.submit()">
                 <option value="">Select an existing question...</option>
                 <?php foreach ($faqs as $faq): ?>
                     <option value="<?php echo htmlspecialchars($faq['faq_id']); ?>"
@@ -530,20 +527,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- FAQ Question -->
         <div class="form-group">
             <label for="faq_question" class="label">FAQ Question:</label>
-            <textarea id="faq_question" name="question" class="input-textarea" required><?php echo isset($faqs_data['question']) ? htmlspecialchars($faqs_data['question']) : ''; ?></textarea>
+            <textarea id="faq_question" name="question" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo isset($faqs_data['question']) ? htmlspecialchars($faqs_data['question']) : ''; ?></textarea>
         </div>
         
         <!-- FAQ Answer -->
         <div class="form-group">
             <label for="faq_answer" class="label">FAQ Answer:</label>
-            <textarea id="faq_answer" name="answer" class="input-textarea" required><?php echo isset($faqs_data['answer']) ? htmlspecialchars($faqs_data['answer']) : ''; ?></textarea>
+            <textarea id="faq_answer" name="answer" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo isset($faqs_data['answer']) ? htmlspecialchars($faqs_data['answer']) : ''; ?></textarea>
         </div>
 
-        <!-- Action Buttons (Upload, Update, Delete) -->
-        <div class="button-group">
-            <input type="submit" id="add_faq_btn" name="upload" value="Upload" class="button">
-            <input type="submit" id="update_faq_btn" name="update" value="Update" class="button">
-            <input type="submit" id="delete_faq_btn" name="delete" value="Delete" class="button">
+        <!-- Action btn-info btns (Upload, Update, Delete) -->
+        <div class="btn-info btn-group">
+            <input type="submit" id="add_faq_btn" name="upload" value="Upload" class="btn-info btn">
+            <input type="submit" id="update_faq_btn" name="update" value="Update" class="btn-success btn">
+            <input type="submit" id="delete_faq_btn" name="delete" value="Delete" class="btn-error btn">
         </div>
     </form>
 </div>
@@ -554,6 +551,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!-- Add the CSS styles below -->
 <style>
+    body {
+   background-color: #F3F3E0;
+}
+
     .content{
         margin-left: 250px;
     }
@@ -597,45 +598,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     color: black;
 }
 
-.input-file,
-.input-text,
-.input-textarea,
-.input-select {
-    padding: 12px; /* Increased padding for input fields */
-    border: 1px solid #ccc;
-    border-radius: 6px; /* Slightly rounder borders */
-    font-size: 16px; /* Increased font size */
-    color: #333;
-}
-
-.input-textarea {
-    resize: vertical;
-    height: 140px; /* Increased height for text areas */
-}
-
-.button-group {
+.btn-info btn-group {
     display: flex;
     gap: 20px;
     justify-content: center;
 }
 
-.button {
-    padding: 15px 25px; /* Larger button size */
+.btn-info btn {
+    padding: 15px 25px; /* Larger btn-info btn size */
     border: none;
     background-color: #007bff;
     color: white;
-    font-size: 18px; /* Slightly larger text on buttons */
+    font-size: 18px; /* Slightly larger text on btn-info btns */
     cursor: pointer;
-    border-radius: 6px; /* Slightly more rounded buttons */
-    transition: background-color 0.3s, transform 0.3s ease; /* Added transform for button hover effect */
+    border-radius: 6px; /* Slightly more rounded btn-info btns */
+    transition: background-color 0.3s, transform 0.3s ease; /* Added transform for btn-info btn hover effect */
 }
 
-.button:hover {
+.btn-info btn:hover {
     background-color: #0056b3;
     transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
-.button:disabled {
+.btn-info btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
@@ -655,15 +640,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         gap: 16px; /* Adjust gap between form fields */
     }
 
-    .input-file,
-    .input-text,
-    .input-textarea,
-    .input-select {
-        font-size: 15px; /* Slightly smaller font size for inputs */
-    }
 
-    .button {
-        font-size: 17px; /* Adjust button font size */
+    .btn-info btn {
+        font-size: 17px; /* Adjust btn-info btn font size */
         padding: 14px 22px; /* Adjust padding for medium screens */
     }
 }
@@ -683,15 +662,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         gap: 12px; /* Adjust gap between form fields */
     }
 
-    .input-file,
-    .input-text,
-    .input-textarea,
-    .input-select {
-        font-size: 14px; /* Smaller font size for inputs */
-    }
-
-    .button {
-        font-size: 16px; /* Smaller buttons on mobile */
+    .btn-info btn {
+        font-size: 16px; /* Smaller btn-info btns on mobile */
         padding: 12px 20px; /* Adjust padding for mobile */
     }
 }

@@ -106,12 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="privacy_policy" class="form-label">Privacy Policy:</label>
-            <textarea id="privacy_policy" name="privacy_policy" class="form-textarea" required><?php echo isset($selected_policy['privacy_policy']) ? htmlspecialchars($selected_policy['privacy_policy']) : ''; ?></textarea>
+            <textarea id="privacy_policy" name="privacy_policy" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo isset($selected_policy['privacy_policy']) ? htmlspecialchars($selected_policy['privacy_policy']) : ''; ?></textarea>
         </div>
         <div class="form-actions">
             <?php if ($selected_policy): ?>
-                <input type="submit" id="update_privacy_policy_btn" name="update_privacy_policy" value="Update Privacy Policy" class="form-button">
-                <input type="submit" id="delete_privacy_policy_btn" name="delete_privacy_policy" value="Delete Privacy Policy" class="form-button">
+                <input type="submit" id="update_privacy_policy_btn" name="update_privacy_policy" value="Update Privacy Policy" class="btn btn-info">
+                <input type="submit" id="delete_privacy_policy_btn" name="delete_privacy_policy" value="Delete Privacy Policy" class="btn btn-error ">
             <?php endif; ?>
         </div>
     </form>
@@ -123,12 +123,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="terms_conditions" class="form-label">Terms and Conditions:</label>
-            <textarea id="terms_conditions" name="terms_conditions" class="form-textarea" required><?php echo isset($selected_policy['terms_condition']) ? htmlspecialchars($selected_policy['terms_condition']) : ''; ?></textarea>
+            <textarea id="terms_conditions" name="terms_conditions" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo isset($selected_policy['terms_condition']) ? htmlspecialchars($selected_policy['terms_condition']) : ''; ?></textarea>
         </div>
         <div class="form-actions">
             <?php if ($selected_policy): ?>
-                <input type="submit" id="update_terms_conditions_btn" name="update_terms_conditions" value="Update Terms and Conditions" class="form-button">
-                <input type="submit" id="delete_terms_conditions_btn" name="delete_terms_conditions" value="Delete Terms and Conditions" class="form-button">
+                <input type="submit" id="update_terms_conditions_btn" name="update_terms_conditions" value="Update Terms and Conditions" class="btn btn-info">
+                <input type="submit" id="delete_terms_conditions_btn" name="delete_terms_conditions" value="Delete Terms and Conditions" class="btn btn-error">
             <?php endif; ?>
         </div>
     </form>
@@ -153,6 +153,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!-- Styles -->
 <style>
+body {
+    background-color: #F3F3E0;
+    height: 1000px;
+    padding: 100px;
+    color: black;
+}
+
     .content{
         margin-left: 250px;
     }
