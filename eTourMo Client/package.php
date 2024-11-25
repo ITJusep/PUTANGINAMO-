@@ -65,6 +65,7 @@ if (isset($_GET['package_id'])) {
     $package_id = (int)$_GET['package_id'];
     $packageDetailsQuery = "SELECT 
     p.package_name,
+    p.package_pax,
     p.package_location,
     p.package_price,
     p.package_category,
@@ -76,6 +77,7 @@ if (isset($_GET['package_id'])) {
     p.package_duration,
     p.package_cancellation_policy,
     p.package_itinerary,
+    p.package_minimum,
     i.image_data,
     i.image_type
 FROM packages p
@@ -326,7 +328,7 @@ WHERE p.package_id = $package_id";
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
             <p><strong>Number of Passengers:</strong> 
-                <input type="number" name="booking_pax" min="1" required value="1">
+                <input type="number" name="booking_pax" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
             </p>
 
             <p><strong>Booking Start Date:</strong>

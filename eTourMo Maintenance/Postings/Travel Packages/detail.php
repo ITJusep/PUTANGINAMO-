@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $package_duration = isset($_POST['package_duration']) ? $_POST['package_duration'] : $package_data['package_duration'];
     $package_cancellation_policy = isset($_POST['package_cancellation_policy']) ? $_POST['package_cancellation_policy'] : $package_data['package_cancellation_policy'];
     $package_itinerary = isset($_POST['package_itinerary']) ? $_POST['package_itinerary'] : $package_data['package_itinerary'];
+    $package_minimum = isset($_POST['package_minimum']) ? $_POST['package_minimum'] : $package_data['package_minimum'];
 
     // Handle Update Package action
     if (isset($_POST['update']) && !empty($package_id)) {
@@ -64,7 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             package_requirements = ?, 
             package_duration = ?, 
             package_cancellation_policy = ?, 
-            package_itinerary = ? 
+            package_itinerary = ?,
+            package_minimum = ?
             WHERE package_id = ?");
 
         // Execute and check for errors
@@ -82,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $package_duration, 
             $package_cancellation_policy, 
             $package_itinerary, 
+            $package_minimum,
             $package_id
         ]);
 
@@ -154,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="content">
 <!-- Back Button -->
 <div class="back-button-container">
-    <button type="button" class="back-button" onclick="window.location.href='travel_packages.php';">
+    <button type="button" class="btn btn-info w-20" onclick="window.location.href='travel_packages.php';">
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5"></path>
             <path d="M12 5l-7 7 7 7"></path>
@@ -166,77 +169,82 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <form class="form-container" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="package_name">Package Name:</label>
-        <input type="text" name="package_name" value="<?php echo htmlspecialchars($package_data['package_name'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="package_name" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_name'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_category">Package Category:</label>
-        <input type="text" name="package_category" value="<?php echo htmlspecialchars($package_data['package_category'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="package_category" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_category'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_pax">Package Pax:</label>
-        <input type="text" name="package_pax" value="<?php echo htmlspecialchars($package_data['package_pax'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="package_pax" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_pax'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_location">Package Location:</label>
-        <input type="text" name="package_location" value="<?php echo htmlspecialchars($package_data['package_location'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="package_location" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_location'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_price">Package Price:</label>
-        <input type="text" name="package_price" value="<?php echo htmlspecialchars($package_data['package_price'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="package_price" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_price'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_description">Package Description:</label>
-        <textarea name="package_description" required><?php echo htmlspecialchars($package_data['package_description'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="package_description" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($package_data['package_description'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="package_inclusion">Package Inclusion:</label>
-        <textarea name="package_inclusion" required><?php echo htmlspecialchars($package_data['package_inclusion'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="package_inclusion" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($package_data['package_inclusion'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="package_requirements">Package Requirements:</label>
-        <textarea name="package_requirements" required><?php echo htmlspecialchars($package_data['package_requirements'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="package_requirements" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($package_data['package_requirements'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="package_duration">Package Duration:</label>
-        <input type="text" name="package_duration" value="<?php echo htmlspecialchars($package_data['package_duration'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="package_duration" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_duration'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_cancellation_policy">Cancellation Policy:</label>
-        <textarea name="package_cancellation_policy" required><?php echo htmlspecialchars($package_data['package_cancellation_policy'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="package_cancellation_policy" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($package_data['package_cancellation_policy'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="package_itinerary">Package Itinerary:</label>
-        <textarea name="package_itinerary" required><?php echo htmlspecialchars($package_data['package_itinerary'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="package_itinerary" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($package_data['package_itinerary'] ?? '', ENT_QUOTES); ?></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="package_minimum">Minimum Passengers:</label>
+        <input type="number" name="package_minimum" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_minimum'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <!-- Start and End Date Picker Section -->
     <div class="form-group">
         <label for="package_start">Package Start Date:</label>
-        <input type="date" name="package_start" value="<?php echo htmlspecialchars($package_data['package_start'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="date" name="package_start" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_start'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="package_ends">Package End Date:</label>
-        <input type="date" name="package_ends" value="<?php echo htmlspecialchars($package_data['package_ends'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="date" name="package_ends" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($package_data['package_ends'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <!-- Images Section -->
     <div class="form-group">
         <label for="package_images">Upload Package Images (Optional):</label>
-        <input type="file" name="package_images[]" multiple>
+        <input type="file" name="package_images[]" class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" required>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="delete_images">Delete Images (Select to delete):</label>
         <?php if ($images): ?>
             <?php foreach ($images as $image): ?>
@@ -246,11 +254,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
-    </div>
+    </div> -->
 
     <div class="form-group">
-        <button type="submit" name="update" class="btn btn-primary">Update</button>
-        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+        <button type="submit" name="update" class="btn btn-info">Update</button>
+        <button type="submit" name="delete" class="btn btn-error">Delete</button>
     </div>
 </form>
 </div>
@@ -338,56 +346,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     margin-top: 5px; /* Adjust margin between checkbox and image */
 }
 
-/* General button styles for both regular and back buttons */
-.form-group button, .back-button-container .back-button,
-.button-group input[type="submit"], .button-group button {
-    padding: 12px 24px;                 /* Increased padding for a more balanced button */
-    font-size: 16px;                    /* Maintain legible font size */
-    font-weight: 600;                   /* Slightly bolder text */
-    text-align: center;                 /* Center text inside the button */
-    border: none;                       /* Remove default border */
-    border-radius: 8px;                 /* Rounded corners for smoother appearance */
-    cursor: pointer;                   /* Pointer cursor to indicate clickability */
-    transition: all 0.3s ease-in-out;   /* Smooth transition for hover and active states */
-    text-transform: uppercase;          /* Uppercase text for better readability */
-    display: inline-block;              /* Ensure buttons align properly with the content */
-    letter-spacing: 1px;                /* Slight spacing for better readability */
-}
+
 
 .back-button{
     margin-left: 10px;
 }
 
-/* Default state for all buttons (background gradient, padding, and text styles) */
-.form-group button, .back-button-container .back-button,
-.button-group input[type="submit"], .button-group button {
-    background: linear-gradient(145deg, #007bff, #0056b3); /* Subtle gradient background */
-    color: white;                         /* White text color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
-}
 
-/* Hover effect for all buttons */
-.form-group button:hover, .back-button-container .back-button:hover,
-.button-group input[type="submit"]:hover, .button-group button:hover {
-    background: linear-gradient(145deg, #0056b3, #00428a); /* Darker gradient on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);   /* More pronounced shadow for hover effect */
-}
-
-/* Active effect for all buttons (when clicked) */
-.form-group button:active, .back-button-container .back-button:active,
-.button-group input[type="submit"]:active, .button-group button:active {
-    background: linear-gradient(145deg, #003c7a, #00284f); /* Even darker gradient when clicked */
-    box-shadow: none; /* Remove shadow on active state */
-    transform: translateY(2px); /* Slight move down for a "pressed" effect */
-}
-
-/* Focus effect for all buttons (to ensure accessibility) */
-.form-group button:focus, .back-button-container .back-button:focus,
-.button-group input[type="submit"]:focus, .button-group button:focus {
-    outline: none; /* Remove default outline */
-    border: 2px solid #0056b3; /* Border on focus to indicate the active element */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light shadow to indicate focus */
-}
 
 /* Back button container and its styles */
 .back-button-container {

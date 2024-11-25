@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle booking cancellation
     if (isset($_POST['cancel_booking'])) {
         $bookingId = $_POST['booking_id'];
-        $cancelSql = "UPDATE bookings SET booking_status = 'Cancelled' WHERE booking_id = ? AND booking_status NOT IN ('Confirmed', 'Done')";
+        $cancelSql = "UPDATE bookings SET booking_status = 'Cancelled' WHERE booking_id = ? AND booking_status NOT IN ('Confirmed', 'Done', 'Declined')";
         $stmt = $conn->prepare($cancelSql);
         $stmt->bind_param("i", $bookingId);
         if ($stmt->execute()) {
@@ -273,7 +273,7 @@ th {
                         <td><?= htmlspecialchars($booking['booking_total_price']) ?></td>
                         <td><?= htmlspecialchars($booking['booking_status']) ?></td>
                         <td>
-                            <?php if ($booking['booking_status'] !== 'Confirmed' && $booking['booking_status'] !== 'Done') : ?>
+                            <?php if ($booking['booking_status'] !== 'Confirmed' && $booking['booking_status'] !== 'Done' && $booking['booking_status'] !== 'Declined') : ?>
                                 <form method="POST" action="customer.php">
                                     <input type="hidden" name="booking_id" value="<?= $booking['booking_id'] ?>">
                                     <button type="submit" name="cancel_booking">Cancel</button>
