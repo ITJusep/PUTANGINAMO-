@@ -75,20 +75,26 @@ if (isset($_GET['search'])) {
 
     // Use the username directly from the user_profiles table
     $stmt = $pdo->prepare("
-        SELECT b.*, u.email, u.contact_information, p.package_name, u.email
+        SELECT b.*, u.email, u.contact_information, p.package_name, u.email,
+            GROUP_CONCAT(a.addon_name SEPARATOR ', ') AS addon_names
         FROM bookings b
         JOIN user_profiles u ON b.user_id = u.user_id
         JOIN packages p ON b.package_id = p.package_id
+        LEFT JOIN add_ons a ON p.package_id = a.package_id
         WHERE u.email LIKE :searchTerm
+        GROUP BY b.booking_id
     ");
     $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
 } else {
     // Fetch all bookings if no search term is entered
     $stmt = $pdo->prepare("
-        SELECT b.*, u.email, u.contact_information, p.package_name 
+        SELECT b.*, u.email, u.contact_information, p.package_name, 
+            GROUP_CONCAT(a.addon_name SEPARATOR ', ') AS addon_names
         FROM bookings b
         JOIN user_profiles u ON b.user_id = u.user_id
         JOIN packages p ON b.package_id = p.package_id
+        LEFT JOIN add_ons a ON p.package_id = a.package_id
+        GROUP BY b.booking_id
     ");
     $stmt->execute();
 }
@@ -123,6 +129,7 @@ $booking_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Email</th>
                 <th>Contact</th>
                 <th>Package Name</th>
+                <th>Add-Ons</th>
                 <th>Status</th>
                 <th>Admin ID</th>
             </tr>
@@ -145,6 +152,7 @@ $booking_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo htmlspecialchars($booked['email']); ?></td>
                 <td><?php echo htmlspecialchars($booked['contact_information']); ?></td>
                 <td><?php echo htmlspecialchars($booked['package_name']); ?></td>
+                <td><?php echo htmlspecialchars($booked['addon_names']); ?></td> <!-- Display the add-ons -->
                 <td><?php echo htmlspecialchars($booked['booking_status']); ?></td>
                 <td><?php echo htmlspecialchars($booked['admin_id']); ?></td>
             </tr>
