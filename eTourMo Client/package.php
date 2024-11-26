@@ -191,14 +191,13 @@ WHERE p.package_id = $package_id";
 
 .modal-content {
     background-color: white;
-    padding: 16px; /* Reduced padding for a smaller modal */
-    border-radius: 8px;
-    width: 60%;  /* Keep the width smaller */
-    max-width: 500px;  /* Restrict the max width */
-    max-height: 80%;  /* Limit the height of the modal */
-    overflow-y: auto;  /* Allow scrolling if content is too long */
-    text-align: left;  /* Align text to the left for readability */
-    box-sizing: border-box; /* Prevent padding from expanding the width */
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    box-sizing: border-box;
+    /* max-width: 800px; */
+    border-radius: 10px;
 }
 
 .modal-content img {
@@ -247,27 +246,71 @@ WHERE p.package_id = $package_id";
 }
     </style>
 <?php include('header.php'); ?>
+<div class="carousel w-full" style="margin-top: -350px">
+    <div id="slide1" class="carousel-item relative w-full">
+        <img
+        src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
+        class="w-full" />
+        <div class="absolute left-5 right-5 bottom-10 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide4" class="btn btn-circle">❮</a>
+        <a href="#slide2" class="btn btn-circle">❯</a>
+        </div>
+    </div>
+    <div id="slide2" class="carousel-item relative w-full">
+        <img
+        src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+        class="w-full" />
+        <div class="absolute left-5 right-5 bottom-10 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide1" class="btn btn-circle">❮</a>
+        <a href="#slide3" class="btn btn-circle">❯</a>
+        </div>
+    </div>
+    <div id="slide3" class="carousel-item relative w-full">
+        <img
+        src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
+        class="w-full" />
+        <div class="absolute left-5 right-5 bottom-10 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide2" class="btn btn-circle">❮</a>
+        <a href="#slide4" class="btn btn-circle">❯</a>
+        </div>
+    </div>
+    <div id="slide4" class="carousel-item relative w-full">
+        <img
+        src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
+        class="w-full" />
+        <div class="absolute left-5 right-5 bottom-10 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide3" class="btn btn-circle">❮</a>
+        <a href="#slide1" class="btn btn-circle">❯</a>
+        </div>
+    </div>
+    </div>
 <div class="content">
     <div class="container">
-        <h2>Featured Packages</h2>
+        <h2 class="text-4xl my-6 font-semibold">Featured Packages</h2>
         <div class="package-grid">
             <?php
             // Display each package
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo '<div class="package-card">';
+                    echo '<div class="card card-compact bg-white shadow-xl">';
+                    echo '<figure>';
                     if ($row['image_data']) {
                         $imageData = base64_encode($row['image_data']);
                         $imageType = $row['image_type'];
-                        echo "<img src='data:image/$imageType;base64,$imageData' class='package-image' alt='{$row['package_name']}'>";
+                        echo "<img src='data:image/$imageType;base64,$imageData' class='w-full' alt='{$row['package_name']}'>";
                     } else {
                         echo "<img src='default-image.jpg' class='package-image' alt='Default Image'>";
                     }
-                    echo "<div class='package-title'>{$row['package_name']}</div>";
-                    echo "Package Available Until <div class='package_ends'>{$row['package_ends']}</div>";
-                    echo "<div class='package-location'>{$row['package_location']}</div>";
-                    echo "<div class='package-price'>₱" . number_format($row['package_price'], 2) . "</div>";
-                    echo "<a href='?package_id={$row['package_id']}' class='book-now-btn'>Book Now</a>";
+                    echo '</figure>';
+                    echo "<div class='card-body'>";
+                    echo "<div class='text-3xl font-bold'>{$row['package_name']}</div>";
+                    echo "<div class='font-bold text-gray-600'><i class='fa-regular fa-clock'></i> {$row['package_ends']}</div>";
+                    echo "<div class='font-bold text-gray-600'><i class='fa-solid fa-location-pin'></i> {$row['package_location']}</div>";
+                    echo "<div class='text-2xl font-bold text-green-500'>₱" . number_format($row['package_price'], 2) . "</div>";
+                    echo "<div class='card-actions justify-end'>";
+                    echo "<a href='?package_id={$row['package_id']}' class='btn btn-primary w-full'>Book Now</a>";
+                    echo "</div>";
+                    echo "</div>";
                     echo "</div>";
                 }
             } else {
@@ -289,55 +332,69 @@ WHERE p.package_id = $package_id";
 
     <?php if ($packageDetails && $isLoggedIn): ?>
 <div class="modal-container">
-    <div class="modal-content">
-        <?php
-        // Display package image
-        if ($packageDetails['image_data']) {
-            $imageData = base64_encode($packageDetails['image_data']);
-            $imageType = $packageDetails['image_type'];
-            echo "<img src='data:image/$imageType;base64,$imageData' class='package-image' alt='{$packageDetails['package_name']}'>";
-        } else {
-            echo "<img src='default-image.jpg' class='package-image' alt='Default Image'>";
-        }
-        ?>
-        <h3><?php echo $packageDetails['package_name']; ?></h3>
-        <p><strong>Location:</strong> <?php echo $packageDetails['package_location']; ?></p>
-        <p><strong>Price:</strong> ₱<?php echo number_format($packageDetails['package_price'], 2); ?></p>
-        <p><strong>Category:</strong> <?php echo $packageDetails['package_category']; ?></p>
+    <div class="modal-content grid grid-cols-2 gap-6">
+        <div>
+            <?php
+            // Display package image
+            if ($packageDetails['image_data']) {
+                $imageData = base64_encode($packageDetails['image_data']);
+                $imageType = $packageDetails['image_type'];
+                echo "<img src='data:image/$imageType;base64,$imageData' class='w-full' alt='{$packageDetails['package_name']}'>";
+            } else {
+                echo "<img src='default-image.jpg' class='package-image' alt='Default Image'>";
+            }
+            ?>
 
-        <!-- New package details -->
-        <p><strong>Package Start:</strong> <?php echo nl2br($packageDetails['package_start']); ?></p>
-        <p><strong>Package End:</strong> <?php echo nl2br($packageDetails['package_ends']); ?></p>
-        <p><strong>Description:</strong> <?php echo nl2br($packageDetails['package_description']); ?></p>
-        <p><strong>Inclusions:</strong> <?php echo nl2br($packageDetails['package_inclusion']); ?></p>
-        <p><strong>Requirements:</strong> <?php echo nl2br($packageDetails['package_requirements']); ?></p>
-        <p><strong>Duration:</strong> <?php echo $packageDetails['package_duration']; ?></p>
-        <p><strong>Cancellation Policy:</strong> <?php echo nl2br($packageDetails['package_cancellation_policy']); ?></p>
-        <p><strong>Itinerary:</strong> <?php echo nl2br($packageDetails['package_itinerary']); ?></p>
-
-        <!-- Success message display -->
-        <?php if (isset($_GET['success']) && $_GET['success'] == 'true'): ?>
-            <div class="booking-success-message">
-                <p style="color: green; font-size: 18px; font-weight: bold;">Booking successful! Thank you for your reservation.</p>
+            <div class="flex justify-between mb-4">
+                <h2 class="text-3xl font-semibold"><?php echo $packageDetails['package_name']; ?></h2>
+                <h2 class="text-3xl font-semibold text-green-500">₱<?php echo number_format($packageDetails['package_price'], 2); ?></h2>
             </div>
-        <?php endif; ?>
 
-        <!-- Booking Form with Start Date -->
-        <form action="process_package_booking.php" method="POST">
-            <input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
-            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+            <p><strong>Description:</strong> <?php echo nl2br($packageDetails['package_description']); ?></p>
+            <p><strong>Location:</strong> <?php echo $packageDetails['package_location']; ?></p>
+            <p><strong>Category:</strong> <?php echo $packageDetails['package_category']; ?></p>
 
-            <p><strong>Number of Passengers:</strong> 
-                <input type="number" name="booking_pax" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
-            </p>
+        </div>
 
-            <p><strong>Booking Start Date:</strong>
-                <input type="date" name="booking_start" id="booking_start" required>
-            </p>
+        <div>
+            <div class="divider divider-start text-3xl divider-info">Tour Dates</div>
+            <p><strong>Package Start:</strong> <?php echo nl2br($packageDetails['package_start']); ?></p>
+            <p><strong>Package End:</strong> <?php echo nl2br($packageDetails['package_ends']); ?></p>
+   
+            <div class="divider divider-start text-3xl divider-info mt-8">More Information</div>
+            <p><strong>Inclusions:</strong> <?php echo nl2br($packageDetails['package_inclusion']); ?></p>
+            <p><strong>Requirements:</strong> <?php echo nl2br($packageDetails['package_requirements']); ?></p>
+            <p><strong>Duration:</strong> <?php echo $packageDetails['package_duration']; ?></p>
+            <p><strong>Cancellation Policy:</strong> <?php echo nl2br($packageDetails['package_cancellation_policy']); ?></p>
+            <p><strong>Itinerary:</strong> <?php echo nl2br($packageDetails['package_itinerary']); ?></p>
 
-            <button class="back-btn" type="button" onclick="window.history.back();">Back</button>
-            <button class="confirm-booking-btn" type="submit">Confirm Booking</button>
-        </form>
+            <!-- Success message display -->
+            <?php if (isset($_GET['success']) && $_GET['success'] == 'true'): ?>
+                <div class="booking-success-message">
+                    <p style="color: green; font-size: 18px; font-weight: bold;">Booking successful! Thank you for your reservation.</p>
+                </div>
+            <?php endif; ?>
+    
+            <div class="divider divider-start text-3xl divider-info mt-8">Booking Information</div>
+            <!-- Booking Form with Start Date -->
+            <form action="process_package_booking.php" method="POST">
+                <input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+    
+                <p><strong>Number of Passengers:</strong> 
+                    <input type="number" name="booking_pax" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
+                </p>
+    
+                <p><strong>Booking Start Date:</strong>
+                    <input type="date" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" name="booking_start" id="booking_start" required>
+                </p>
+    
+                <button class="btn btn-base" type="button" onclick="window.history.back();">Back</button>
+                <button class="btn btn-info" type="submit">Confirm Booking</button>
+            </form>
+
+        </div>
+
     </div>
 </div>
 <?php endif; ?>
