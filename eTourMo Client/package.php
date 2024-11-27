@@ -358,15 +358,6 @@ if (isset($_GET['package_id'])) {
                 echo "<img src='default-image.jpg' class='package-image' alt='Default Image'>";
             }
             ?>
-            <h3><?php echo $packageDetails['package_name']; ?></h3>
-            <p><strong>Location:</strong> <?php echo $packageDetails['package_location']; ?></p>
-            <p><strong>Price:</strong> ₱<?php echo number_format($packageDetails['package_price'], 2); ?></p>
-            <p><strong>Category:</strong> <?php echo $packageDetails['package_category']; ?></p>
-
-            <!-- New package details -->
-            <p><strong>Package Start:</strong> <?php echo nl2br($packageDetails['package_start']); ?></p>
-            <p><strong>Package End:</strong> <?php echo nl2br($packageDetails['package_ends']); ?></p>
-            <p><strong>Description:</strong> <?php echo nl2br($packageDetails['package_description']); ?></p>
 
             <div class="flex justify-between mb-4">
                 <h2 class="text-3xl font-semibold"><?php echo $packageDetails['package_name']; ?></h2>
@@ -375,7 +366,7 @@ if (isset($_GET['package_id'])) {
 
             <p><strong>Description:</strong> <?php echo nl2br($packageDetails['package_description']); ?></p>
             <p><strong>Location:</strong> <?php echo $packageDetails['package_location']; ?></p>
-            <p><strong>Category:</strong> <?php echo $packageDetails['package_category']; ?></p>
+            <p><strong>Category:</strong> <?php echo $packageDetails['package_category  ']; ?></p>
 
         </div>
 
@@ -406,11 +397,11 @@ if (isset($_GET['package_id'])) {
                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
                 <p><strong>Number of Passengers:</strong> 
-                    <input type="number" name="booking_pax" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
+                    <input type="number" name="booking_pax" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
                 </p>
-
+    
                 <p><strong>Booking Start Date:</strong>
-                    <input type="date" name="booking_start" id="booking_start" required>
+                    <input type="date" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" name="booking_start" id="booking_start" required>
                 </p>
 
                 <!-- Add-Ons -->
@@ -424,21 +415,11 @@ if (isset($_GET['package_id'])) {
                     <?php endforeach; ?>
                 <?php endif; ?>
 
-                <button class="back-btn" type="button" onclick="window.history.back();">Back</button>
-                <button class="confirm-booking-btn" type="submit">Confirm Booking</button>
+                <button class="btn btn-base btn-md" type="button" onclick="window.history.back();">Back</button>
+                <button class="btn btn-info btn-md" type="submit">Confirm Booking</button>
             </form>
         </div>
 
-                <p><strong>Number of Passengers:</strong> 
-                    <input type="number" name="booking_pax" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
-                </p>
-    
-                <p><strong>Booking Start Date:</strong>
-                    <input type="date" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" name="booking_start" id="booking_start" required>
-                </p>
-    
-                <button class="btn btn-base" type="button" onclick="window.history.back();">Back</button>
-                <button class="btn btn-info" type="submit">Confirm Booking</button>
             </form>
 
         </div>
