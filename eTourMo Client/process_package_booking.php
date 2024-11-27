@@ -124,14 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             }
             $insertStmt->close();
-        } else {
+        }} else {
             echo "Package not found.";
         }
         $stmt->close();
-    } else {
-        echo "Booking start date is missing.";
+        } else {
+            echo "Booking start date is missing.";
+        }
     }
-}
 
 $conn->close();
 ?>
