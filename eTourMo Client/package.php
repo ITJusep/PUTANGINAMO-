@@ -366,7 +366,7 @@ if (isset($_GET['package_id'])) {
 
             <p><strong>Description:</strong> <?php echo nl2br($packageDetails['package_description']); ?></p>
             <p><strong>Location:</strong> <?php echo $packageDetails['package_location']; ?></p>
-            <p><strong>Category:</strong> <?php echo $packageDetails['package_category  ']; ?></p>
+            <p><strong>Category:</strong> <?php echo $packageDetails['package_category']; ?></p>
 
         </div>
 
