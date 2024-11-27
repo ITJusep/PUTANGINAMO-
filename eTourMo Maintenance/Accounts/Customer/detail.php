@@ -93,7 +93,15 @@ $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 <!-- Inline CSS -->
 <style>
 /* Global Styles */
-
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1000px;
+    padding: 100px;
+}
 .content{
     font-family: Arial, sans-serif;
     margin: 0;

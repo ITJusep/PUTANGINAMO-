@@ -258,7 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div class="form-group">
         <button type="submit" name="update" class="btn btn-info">Update</button>
-        <button type="submit" name="delete" class="btn btn-error">Delete</button>
+        <button type="submit" name="delete" class="btn btn-error" onclick="return confirm('Are you sure you want to delete this package?');">Delete</button>
     </div>
 </form>
 </div>
@@ -283,6 +283,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: block; /* Ensure it's block-level to prevent any inline behavior */
+    height: 800px;
+    overflow: scroll;
 }
 
 /* Form group styles */

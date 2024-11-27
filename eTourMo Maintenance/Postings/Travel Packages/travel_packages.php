@@ -196,7 +196,7 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <label for="package_itinerary">Package Itinerary:</label>
                 <textarea name="package_itinerary" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md"></textarea>
             </div>
-a
+
             <div class="form-group">
                 <label for="package_minimum">Minimum Passengers:</label>
                 <input type="number" name="package_minimum" class="input input-bordered w-full bg-[#CBDCEB] text-black" max="100" min="1" required>
@@ -229,8 +229,6 @@ a
 <!-- CSS for Modal -->
 <style>
 /* General page styles */
-
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -247,8 +245,6 @@ h1 {
     margin-top: 20px;
     font-size: 2em;
 }
-
-
 
 .upload-button a:hover {
     background-color: #2980b9;
