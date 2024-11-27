@@ -117,6 +117,7 @@ if ($logged_in_user_id !== 'Guest') {
             <div class="submenu">
                 <a href="/eTourMo Maintenance/Postings/Travel Packages/travel_packages.php" class="<?= ($current_page == 'travel_packages') ? 'active' : '' ?>">Travel Packages</a>
                 <a href="/eTourMo Maintenance/Postings/Rental Packages/rental.php" class="<?= ($current_page == 'rental') ? 'active' : '' ?>">Rental Packages</a>
+                <a href="/eTourMo Maintenance/Postings/Add On/addon.php" class="<?= ($current_page == 'addon.php') ? 'active' : '' ?>">Add Ons</a>
             </div>
         </div>
 

@@ -36,21 +36,22 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../../Components/header.php'); ?>
 <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1000px;
+    padding: 100px;
+}
+
     .content{
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    margin-left: 250px;
+    margin-left: 100px;
     margin-top: 50px;
-    }
-    /* General table styles */
-    .user-table {
-        width: 50%;
-        margin: 20px auto;
-        border-collapse: collapse;
-        background-color: white;
-        border: 1px solid #ddd;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     /* Table header styles */
@@ -142,7 +143,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /* Input field */
-.search-input {
+.input {
     display: block;
     width: 400px;
     padding: 1rem 1rem 1rem 2.5rem;  /* p-4 ps-10 */
@@ -150,7 +151,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     color: #111827;       /* text-gray-900 */
     border: 1px solid #d1d5db;  /* border-gray-300 */
     border-radius: 0.5rem; /* rounded-lg */
-    background-color: #f9fafb;  /* bg-gray-50 */
     transition: border-color 0.2s, box-shadow 0.2s;
     margin-bottom: 30px;
 }
@@ -194,7 +194,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     transition: background-color 0.2s, box-shadow 0.2s;
     border: none;
     cursor: pointer;
-    margin-bottom: 0;
+    margin-bottom: -4px;
     margin-right: 50px;
 }
 
@@ -224,7 +224,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="content">
 <form class="search-form" method="GET" action="">
     <div class="search-container">
-        <input type="search" id="default-search" name="search" class="search-input" placeholder="Search Customer's Name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" required />
+        <input type="search" id="default-search" name="search" class="input input-bordered join-item bg-[#CBDCEB] placeholder-black text-black" placeholder="Search Customer's Name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" required />
         <button type="submit" class="search-button">Search</button>
     </div>
 </form>
@@ -233,9 +233,9 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Check if there are any user accounts -->
 <?php if ($users): ?>
     <!-- Loop through all users and display their information -->
-    <table class="user-table">
+    <table class="table table-lg text-black mt-12">
         <thead>
-            <tr>
+            <tr class="bg-[#608BC1] text-black">
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Action</th>

@@ -144,42 +144,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div class="form-group">
         <label for="rental_type">Rental Type:</label>
-        <input type="text" name="rental_type" value="<?php echo htmlspecialchars($rental_data['rental_type'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="rental_type" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($rental_data['rental_type'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="rental_pax">Rental Pax:</label>
-        <input type="text" name="rental_pax" value="<?php echo htmlspecialchars($rental_data['rental_pax'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="rental_pax" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($rental_data['rental_pax'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="rental_price">Rental Price:</label>
-        <input type="text" name="rental_price" value="<?php echo htmlspecialchars($rental_data['rental_price'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="rental_price" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($rental_data['rental_price'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="rental_description">Rental Description:</label>
-        <textarea name="rental_description" required><?php echo htmlspecialchars($rental_data['rental_description'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="rental_description" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($rental_data['rental_description'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="rental_not_included">Rental Not Included:</label>
-        <textarea name="rental_not_included"><?php echo htmlspecialchars($rental_data['rental_not_included'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="rental_not_included" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($rental_data['rental_not_included'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="rental_duration">Rental Duration:</label>
-        <input type="text" name="rental_duration" value="<?php echo htmlspecialchars($rental_data['rental_duration'] ?? '', ENT_QUOTES); ?>" required>
+        <input type="text" name="rental_duration" class="input input-bordered w-full bg-[#CBDCEB] text-black" value="<?php echo htmlspecialchars($rental_data['rental_duration'] ?? '', ENT_QUOTES); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="rental_cancellation_policy">Rental Cancellation Policy:</label>
-        <textarea name="rental_cancellation_policy"><?php echo htmlspecialchars($rental_data['rental_cancellation_policy'] ?? '', ENT_QUOTES); ?></textarea>
+        <textarea name="rental_cancellation_policy" class="textarea textarea-bordered bg-[#CBDCEB] text-black textarea-md" required><?php echo htmlspecialchars($rental_data['rental_cancellation_policy'] ?? '', ENT_QUOTES); ?></textarea>
     </div>
 
     <div class="form-group">
         <label for="rental_images">Upload Images:</label>
-        <input type="file" name="rental_images[]" multiple>
+        <input type="file" name="rental_images[]" class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" required>
     </div>
 
     <!-- Existing Images Section -->
@@ -198,8 +198,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <div class="form-group">
-        <button type="submit" name="update">Update</button>
-        <button type="submit" name="delete" onclick="return confirm('Are you sure you want to delete this rental?');">Delete</button>
+        <button type="submit" name="update" class="btn btn-info">Update</button>
+        <button type="submit" name="delete" class="btn btn-error" onclick="return confirm('Are you sure you want to delete this rental?');">Delete</button>
     </div>
 </form>
 
@@ -223,6 +223,8 @@ margin-left: 250px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: block; /* Ensure it's block-level to prevent any inline behavior */
+    height: 800px;
+    overflow: scroll;
 }
 
 /* Form group styles */
@@ -286,55 +288,8 @@ margin-left: 250px;
     margin-top: 5px; /* Adjust margin between checkbox and image */
 }
 
-/* General button styles for both regular and back buttons */
-.form-group button, .back-button-container .back-button,
-.button-group input[type="submit"], .button-group button {
-    padding: 12px 24px;                 /* Increased padding for a more balanced button */
-    font-size: 16px;                    /* Maintain legible font size */
-    font-weight: 600;                   /* Slightly bolder text */
-    text-align: center;                 /* Center text inside the button */
-    border: none;                       /* Remove default border */
-    border-radius: 8px;                 /* Rounded corners for smoother appearance */
-    cursor: pointer;                   /* Pointer cursor to indicate clickability */
-    transition: all 0.3s ease-in-out;   /* Smooth transition for hover and active states */
-    text-transform: uppercase;          /* Uppercase text for better readability */
-    display: inline-block;              /* Ensure buttons align properly with the content */
-    letter-spacing: 1px;                /* Slight spacing for better readability */
-}
-
 .back-button{
     margin-left: 10px;
-}
-
-/* Default state for all buttons (background gradient, padding, and text styles) */
-.form-group button, .back-button-container .back-button,
-.button-group input[type="submit"], .button-group button {
-    background: linear-gradient(145deg, #007bff, #0056b3); /* Subtle gradient background */
-    color: white;                         /* White text color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a lifted effect */
-}
-
-/* Hover effect for all buttons */
-.form-group button:hover, .back-button-container .back-button:hover,
-.button-group input[type="submit"]:hover, .button-group button:hover {
-    background: linear-gradient(145deg, #0056b3, #00428a); /* Darker gradient on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);   /* More pronounced shadow for hover effect */
-}
-
-/* Active effect for all buttons (when clicked) */
-.form-group button:active, .back-button-container .back-button:active,
-.button-group input[type="submit"]:active, .button-group button:active {
-    background: linear-gradient(145deg, #003c7a, #00284f); /* Even darker gradient when clicked */
-    box-shadow: none; /* Remove shadow on active state */
-    transform: translateY(2px); /* Slight move down for a "pressed" effect */
-}
-
-/* Focus effect for all buttons (to ensure accessibility) */
-.form-group button:focus, .back-button-container .back-button:focus,
-.button-group input[type="submit"]:focus, .button-group button:focus {
-    outline: none; /* Remove default outline */
-    border: 2px solid #0056b3; /* Border on focus to indicate the active element */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light shadow to indicate focus */
 }
 
 /* Back button container and its styles */

@@ -52,7 +52,6 @@ $sql = "
 ";
 $result = $conn->query($sql);
 
-
 // Count total packages for pagination
 $totalPackagesQuery = "SELECT COUNT(*) AS total FROM packages";
 $totalPackagesResult = $conn->query($totalPackagesQuery);
@@ -63,131 +62,142 @@ $totalPages = ceil($totalPackages / $itemsPerPage);
 $packageDetails = null;
 if (isset($_GET['package_id'])) {
     $package_id = (int)$_GET['package_id'];
-    $packageDetailsQuery = "SELECT 
-    p.package_name,
-    p.package_pax,
-    p.package_location,
-    p.package_price,
-    p.package_category,
-    p.package_description,
-    p.package_start,
-    p.package_ends,
-    p.package_inclusion,
-    p.package_requirements,
-    p.package_duration,
-    p.package_cancellation_policy,
-    p.package_itinerary,
-    p.package_minimum,
-    i.image_data,
-    i.image_type
-FROM packages p
-LEFT JOIN package_images i ON p.package_id = i.package_id
-WHERE p.package_id = $package_id";
+    $packageDetailsQuery = "
+    SELECT 
+        p.package_name,
+        p.package_pax,
+        p.package_location,
+        p.package_price,
+        p.package_category,
+        p.package_description,
+        p.package_start,
+        p.package_ends,
+        p.package_inclusion,
+        p.package_requirements,
+        p.package_duration,
+        p.package_cancellation_policy,
+        p.package_itinerary,
+        p.package_minimum,
+        i.image_data,
+        i.image_type
+    FROM packages p
+    LEFT JOIN package_images i ON p.package_id = i.package_id
+    WHERE p.package_id = $package_id";
     $packageDetailsResult = $conn->query($packageDetailsQuery);
     if ($packageDetailsResult->num_rows > 0) {
         $packageDetails = $packageDetailsResult->fetch_assoc();
     }
+
+    // Fetch add-ons for this package
+    $addOnsQuery = "SELECT addon_id, addon_name, price FROM add_ons WHERE package_id = $package_id";
+    $addOnsResult = $conn->query($addOnsQuery);
+    $addOns = [];
+    if ($addOnsResult->num_rows > 0) {
+        while ($addon = $addOnsResult->fetch_assoc()) {
+            $addOns[] = $addon;
+        }
+    }
 }
 
 ?>
-    <style>
-.content {
-    display: flex;
-    justify-content: center;  /* Centers content horizontally */
-    align-items: center;      /* Centers content vertically */
-}
-        /* General reset */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-top: 80px; /* Space for fixed navbar */
-        }
+<style>
+    .content {
+        display: flex;
+        justify-content: center;  /* Centers content horizontally */
+        align-items: center;      /* Centers content vertically */
+    }
+    /* General reset */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding-top: 80px; /* Space for fixed navbar */
+    }
 
-        /* Package layout */
-        .container { max-width: 1200px; width: 100%; padding: 20px; }
-        .package-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; height: 300px; }
+    /* Package layout */
+    .container { max-width: 1200px; width: 100%; padding: 20px; }
+    .package-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; height: 300px; }
 
-        /* Package card styling */
-        .package-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-            background-color: #fff;
-        }
+    /* Package card styling */
+    .package-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        background-color: #fff;
+    }
 
-        .package-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            background-color: #f9f9f9;
-        }
+    .package-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #f9f9f9;
+    }
 
-        /* Image and text styling within the package card */
-        .package-image { max-width: 100%; border-radius: 8px; transition: transform 0.3s; max-height: 110px; }
-        .package-card:hover .package-image {
-            transform: scale(1.1);
-        }
+    /* Image and text styling within the package card */
+    .package-image { max-width: 100%; border-radius: 8px; transition: transform 0.3s; max-height: 110px; }
+    .package-card:hover .package-image {
+        transform: scale(1.1);
+    }
 
-        .package-title { font-size: 18px; font-weight: bold; margin: 10px 0; }
-        .package-location { font-size: 14px; color: #555; }
-        .package-price { font-size: 16px; color: #ff5722; font-weight: bold; margin-top: 10px; margin-bottom: 30px; }
+    .package-title { font-size: 18px; font-weight: bold; margin: 10px 0; }
+    .package-location { font-size: 14px; color: #555; }
+    .package-price { font-size: 16px; color: #ff5722; font-weight: bold; margin-top: 10px; margin-bottom: 30px; }
 
-        /* Button styling */
-        .book-now-btn {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #0073e6;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    /* Button styling */
+    .book-now-btn {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-        .book-now-btn:hover {
-            background-color: #005bb5;
-        }
+    .book-now-btn:hover {
+        background-color: #005bb5;
+    }
 
-        /* Pagination */
-        .pagination {
-            text-align: center;
-            margin-top: 50px;
-        }
-        .pagination a {
-            text-decoration: none;
-            color: #333;
-            margin: 0 5px;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+    /* Pagination */
+    .pagination {
+        text-align: center;
+        margin-top: 50px;
+    }
+    .pagination a {
+        text-decoration: none;
+        color: #333;
+        margin: 0 5px;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
 
-        .pagination a.active, .pagination a:hover {
-            background-color: #0073e6;
-            color: white;
-        }
+    .pagination a.active, .pagination a:hover {
+        background-color: #0073e6;
+        color: white;
+    }
 
-        /* Modal-like styling for package details */
-        /* Modal-like styling for package details */
-        .modal-container {
-    display: <?php echo $packageDetails ? 'flex' : 'none'; ?>;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
-}
+    /* Modal-like styling for package details */
+    .modal-container {
+        display: <?php echo $packageDetails ? 'flex' : 'none'; ?>;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 100;
+    }
+
 
 .modal-content {
     background-color: white;
@@ -200,52 +210,55 @@ WHERE p.package_id = $package_id";
     border-radius: 10px;
 }
 
-.modal-content img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-bottom: 16px;  /* Slightly reduced space below the image */
-}
+    .modal-content img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 16px;  /* Slightly reduced space below the image */
+    }
 
-.modal-content h3 {
-    font-size: 20px;  /* Slightly smaller font size */
-    font-weight: bold;
-    margin-bottom: 8px;  /* Reduced margin for h3 */
-}
+    .modal-content h3 {
+        font-size: 20px;  /* Slightly smaller font size */
+        font-weight: bold;
+        margin-bottom: 8px;  /* Reduced margin for h3 */
+    }
 
-.modal-content p {
-    font-size: 14px;
-    margin-bottom: 8px;  /* Reduced margin for paragraphs */
-}
+    .modal-content p {
+        font-size: 14px;
+        margin-bottom: 8px;  /* Reduced margin for paragraphs */
+    }
 
-.modal-content p strong {
-    font-weight: bold;
-}
+    .modal-content p strong {
+        font-weight: bold;
+    }
 
-.confirm-booking-btn, .back-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
+    .confirm-booking-btn, .back-btn {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-.confirm-booking-btn:hover, .back-btn:hover {
-    background-color: #005bb5;
-}
+    .confirm-booking-btn:hover, .back-btn:hover {
+        background-color: #005bb5;
+    }
 
-/* Styling for the Back button */
-.back-btn {
-    background-color:blue;
-}
+    /* Styling for the Back button */
+    .back-btn {
+        background-color: blue;
+    }
 
-.back-btn:hover {
-    background-color: #999;
-}
-    </style>
+    .back-btn:hover {
+        background-color: #999;
+    }
+</style>
+
 <?php include('header.php'); ?>
+
+
 <div class="carousel w-full" style="margin-top: -350px">
     <div id="slide1" class="carousel-item relative w-full">
         <img
@@ -331,7 +344,7 @@ WHERE p.package_id = $package_id";
     </div>
 
     <?php if ($packageDetails && $isLoggedIn): ?>
-<div class="modal-container">
+    <div class="modal-container">
     <div class="modal-content grid grid-cols-2 gap-6">
         <div>
             <?php
@@ -339,11 +352,21 @@ WHERE p.package_id = $package_id";
             if ($packageDetails['image_data']) {
                 $imageData = base64_encode($packageDetails['image_data']);
                 $imageType = $packageDetails['image_type'];
+
                 echo "<img src='data:image/$imageType;base64,$imageData' class='w-full' alt='{$packageDetails['package_name']}'>";
             } else {
                 echo "<img src='default-image.jpg' class='package-image' alt='Default Image'>";
             }
             ?>
+            <h3><?php echo $packageDetails['package_name']; ?></h3>
+            <p><strong>Location:</strong> <?php echo $packageDetails['package_location']; ?></p>
+            <p><strong>Price:</strong> ₱<?php echo number_format($packageDetails['package_price'], 2); ?></p>
+            <p><strong>Category:</strong> <?php echo $packageDetails['package_category']; ?></p>
+
+            <!-- New package details -->
+            <p><strong>Package Start:</strong> <?php echo nl2br($packageDetails['package_start']); ?></p>
+            <p><strong>Package End:</strong> <?php echo nl2br($packageDetails['package_ends']); ?></p>
+            <p><strong>Description:</strong> <?php echo nl2br($packageDetails['package_description']); ?></p>
 
             <div class="flex justify-between mb-4">
                 <h2 class="text-3xl font-semibold"><?php echo $packageDetails['package_name']; ?></h2>
@@ -374,13 +397,38 @@ WHERE p.package_id = $package_id";
                     <p style="color: green; font-size: 18px; font-weight: bold;">Booking successful! Thank you for your reservation.</p>
                 </div>
             <?php endif; ?>
-    
+
             <div class="divider divider-start text-3xl divider-info mt-8">Booking Information</div>
+
             <!-- Booking Form with Start Date -->
             <form action="process_package_booking.php" method="POST">
                 <input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-    
+
+                <p><strong>Number of Passengers:</strong> 
+                    <input type="number" name="booking_pax" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
+                </p>
+
+                <p><strong>Booking Start Date:</strong>
+                    <input type="date" name="booking_start" id="booking_start" required>
+                </p>
+
+                <!-- Add-Ons -->
+                <p><strong>Add-Ons:</strong></p>
+                <?php if (!empty($addOns)): ?>
+                    <?php foreach ($addOns as $addon): ?>
+                        <label>
+                            <input type="checkbox" name="addons[]" value="<?php echo $addon['addon_id']; ?>"> 
+                            <?php echo $addon['addon_name']; ?> (₱<?php echo number_format($addon['price'], 2); ?>)
+                        </label><br>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <button class="back-btn" type="button" onclick="window.history.back();">Back</button>
+                <button class="confirm-booking-btn" type="submit">Confirm Booking</button>
+            </form>
+        </div>
+
                 <p><strong>Number of Passengers:</strong> 
                     <input type="number" name="booking_pax" class="input input-sm input-bordered w-full bg-[#CBDCEB] text-black" min="<?php echo $packageDetails['package_minimum'] ?>" max="<?php echo $packageDetails['package_pax'] ?>" required value="<?php echo $packageDetails['package_minimum'] ?>">
                 </p>
@@ -396,8 +444,16 @@ WHERE p.package_id = $package_id";
         </div>
 
     </div>
+    <?php endif; ?>
 </div>
-<?php endif; ?>
+
+<?php include('footer.php'); ?>
+
+<?php
+// Close the database connection
+$conn->close();
+?>
+
 <script>
     // JavaScript to enforce the start date to be at least one week ahead
     const bookingStartDateInput = document.getElementById('booking_start');
@@ -412,9 +468,3 @@ WHERE p.package_id = $package_id";
     // Set the minimum date for the input field
     bookingStartDateInput.min = `${year}-${month}-${day}`;
 </script>
-</div>
-<?php include('footer.php'); ?>
-<?php
-// Close the database connection
-$conn->close();
-?>

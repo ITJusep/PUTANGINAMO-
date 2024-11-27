@@ -69,15 +69,23 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include('../../Components/header.php'); ?>
 <div class="content">
 <!-- Upload Button (on the right side of the screen) -->
-<div class="upload-button">
-    <a href="#" id="uploadButton" onclick="openModal()">+</a>
-</div>
+<form class="search-form" method="GET" action="">
+    <div class="join">
+        <div>
+            <div>
+            <input type="search" id="default-search" name="search" class="input input-bordered join-item bg-[#CBDCEB] placeholder-black text-black" placeholder="Search Package Name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info join-item">Search</button>
+        <a href="#" id="uploadButton" onclick="openModal()" class="btn btn-info btn-md join-item bg-[#133E87]">+</a>
+    </div>
+</form>
 
 <?php if ($rentals): ?>
     <!-- Loop through all rentals -->
-    <table class="rental-table">  
+    <table class="table table-lg text-black mt-12">  
         <thead>
-            <tr>
+            <tr class="bg-[#608BC1] text-black">
                 <th>Rental Type</th>
                 <th>Capacity</th>
                 <th>Price</th>
@@ -96,7 +104,7 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tbody>
     </table>
 <?php else: ?>
-    <p>No rentals available.</p>
+    <p style="text-align: center;">No Rentals found matching your search.</p>
 <?php endif; ?>
 
 <!-- Modal for Upload Rental Form -->
@@ -116,38 +124,38 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="form-group">
                 <label for="rental_pax">Capacity:</label>
-                <input type="number" name="rental_pax" required>
+                <input type="number" name="rental_pax" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="rental_price">Rental Price:</label>
-                <input type="number" name="rental_price" required>
+                <input type="number" name="rental_price" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="rental_description">Rental Description:</label>
-                <textarea name="rental_description" required></textarea>
+                <textarea name="rental_description" class="input input-bordered w-full bg-[#CBDCEB] text-black" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="rental_not_included">Rental Not Included:</label>
-                <textarea name="rental_not_included"></textarea>
+                <textarea name="rental_not_included" class="input input-bordered w-full bg-[#CBDCEB] text-black" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="rental_duration">Rental Duration:</label>
-                <input type="text" name="rental_duration" required>
+                <input type="text" name="rental_duration" class="input input-bordered w-full bg-[#CBDCEB] text-black" required>
             </div>
 
             <div class="form-group">
                 <label for="rental_cancellation_policy">Rental Cancellation Policy:</label>
-                <textarea name="rental_cancellation_policy"></textarea>
+                <textarea name="rental_cancellation_policy" class="input input-bordered w-full bg-[#CBDCEB] text-black" required></textarea>
             </div>
 
             <!-- File upload for Rental Images -->
             <div class="form-group">
                 <label for="rental_images">Rental Images:</label>
-                <input type="file" name="rental_images[]" multiple accept="image/*">
+                <input type="file" name="rental_images[]" multiple accept="image/*"class="file-input file-input-bordered w-full file-input-info bg-[#CBDCEB] text-black" />
             </div>
 
             <div class="button-group">
@@ -162,6 +170,20 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- CSS for Modal -->
 <style>
 /* General page styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1000px;
+    padding: 100px;
+}
+/* Form container */
+.search-form {
+max-width: 28rem; /* max-w-md */
+margin: 0 auto;   /* mx-auto */
+}
 .content{
     font-family: Arial, sans-serif;
     margin: 0;
@@ -232,7 +254,7 @@ h1 {
 
 /* Modal styles */
 .modal {
-    display: none;  /* Ensure modal is hidden by default */
+    display: none;  /* Initially hidden */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -240,10 +262,9 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    display: flex;  /* Flexbox for centering */
+    display: flex;  /* Flex to center modal */
     justify-content: center;
     align-items: center;
-    margin-left: 100px;
 }
 
 .modal-content {
@@ -252,8 +273,6 @@ h1 {
     border-radius: 8px;
     width: 90%;
     max-width: 800px;
-    max-height: 90vh;
-    overflow-y: auto; /* Make the modal content scrollable if necessary */
 }
 
 .close {
@@ -269,7 +288,6 @@ h1 {
     text-decoration: none;
     cursor: pointer;
 }
-
 /* Form styles */
 form {
     display: flex;
