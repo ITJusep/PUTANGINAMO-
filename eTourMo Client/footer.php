@@ -91,17 +91,6 @@ try {
     padding-top: 60px;
 }
 
-.modal-content {
-    background-color: white;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    box-sizing: border-box;
-    max-width: 800px;
-    border-radius: 10px;
-}
-
 /* Modal close button */
 .close {
     color: #aaa;

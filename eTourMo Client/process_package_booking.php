@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Calculate base total price
             $totalPrice = $pax * $packagePrice;
 
+
             // Initialize the add-ons array for storing add-on names
             $addOnsSelected = [];
 
@@ -107,6 +108,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } catch (Exception $e) {
                 $conn->rollback();
                 echo "Error: " . $e->getMessage();
+
+            // Insert booking details into the database
+            $insertBookingSql = "INSERT INTO bookings (user_id, package_id, booking_pax, booking_total_price, booking_date, booking_start) 
+                                 VALUES ($userId, $packageId, $pax, $totalPrice, NOW(), '$bookingStartDate')";
+           // After processing booking
+           if ($conn->query($insertBookingSql) === TRUE) {
+               // Redirect back to the package details page with success message
+               $bookingId = $conn->insert_id;
+               
+                header("Location: booking_success.php?package_id=$packageId&success=true&booking_id=$bookingId");
+                exit;
+            } else {
+                echo "Error: " . $conn->error;
+
             }
             $insertStmt->close();
         } else {
