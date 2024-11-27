@@ -1,0 +1,380 @@
+/* About Us Page Styles */
+
+/* Keyframes for fade-in from center */
+@keyframes Fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.companyimage-whoweare-container {
+    display: flex;
+    align-items: center; /* Center-aligns items vertically */
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px; /* Space between image and text */
+    background-color: white;
+}
+
+.company-image-wrapper {
+    flex: 1; /* Adjusts the image container size based on content */
+    max-width: 80%; /* Set max width for the image container */
+    overflow: hidden;
+    background-color: black;
+    border-radius: 10px;
+    animation: Fade 1.5s ease-out; 
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.who-we-are-wrapper {
+    flex: 2; /* Makes the text container wider than the image */
+    padding: 10px;
+    animation: Fade 1.5s ease-out; 
+}
+
+.who-we-are h3,
+.who-we-are p {
+    text-align: justify;
+}
+
+/* Certification Images */
+.certification-image-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.certification-image {
+    margin: 10px;
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    overflow: hidden;
+    flex: 0 1 calc(20% - 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.certificate-img {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.certificate-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Responsive Certification Images */
+@media (max-width: 768px) {
+    .certification-image {
+        flex: 0 1 calc(45% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .certification-image {
+        flex: 0 1 calc(100% - 20px);
+    }
+}
+
+/* Vision & Mission */
+.vision-mission-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.vision-container,
+.mission-container {
+    flex: 1;
+    margin: 10px; /* Adjusted margin for better spacing */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+    min-width: 300px; /* Minimum width for better responsiveness */
+}
+
+.vision-container h3,
+.mission-container h3 {
+    text-align: center;
+}
+
+/* Services */
+.service-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0px 0;
+}
+
+.service-container h3 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin: 0;
+    background-color: transparent;
+    width: 200px; /* Set a fixed width for services */
+    height: 250px; /* Maintain fixed height */
+    box-sizing: border-box;
+}
+
+.service-image-container {
+    margin-top: 20px;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.service-image {
+    width: fit-content;
+    align-items: center;
+}
+
+.service h3 {
+    margin: 5px 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.service p {
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1.1;
+    font-size: 11px;
+}
+
+/* FAQ and Contact Us */
+.faq-container {
+    display: flex;
+    justify-content: center; /* Center the entire container */
+    margin-top: 20px; /* Space above the container */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.faq-list,
+.contact-us-container {
+    flex: 1;
+    max-width: 650px; /* Set a max width for better spacing */
+    margin: 10px; /* Space between the two containers */
+    padding: 15px; /* Inner padding */
+    border: 1px solid #ccc; /* Border around the containers */
+    border-radius: 5px; /* Rounded corners */
+    background-color: transparent;
+}
+
+/* Optional: Add a gap below the FAQ/Contact Us section */
+.faq-container {
+    margin-bottom: 40px; /* Adjust as needed for spacing below */
+}
+
+/* Form Styles */
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+input,
+textarea {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* CEO Message */
+.ceo-message-container {
+    margin: 20px 0;
+}
+
+.ceo-message-container h3 {
+    margin-bottom: 10px;
+}
+
+.ceo-message-container p {
+    line-height: 1.5;
+}
+
+/* Media queries */
+@media (min-width: 320px) and (max-width: 500px) {
+    .companyimage-whoweare-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center align items */
+        width: 100%; /* Set width to 100% of the viewport */
+        margin: 5px 0; /* Adjusted margins */
+        padding: 5px; /* Add padding */
+    }
+
+    .company-image-wrapper {
+        width: 80%; /* Full width for smaller screens */
+        max-width: none; /* Remove max-width restriction */
+        margin-bottom: 0; /* Space below the image */
+    }
+
+    .about-image {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .who-we-are-wrapper {
+        font-size: 0.8rem; /* Adjust font size for readability */
+    }
+
+    .who-we-are h3 {
+        font-size: 1rem; /* Adjust this value to change the size */
+        margin-bottom: 5px; /* Space below the heading */
+        text-align: center; /* Keep heading centered */
+        color: #333; /* Optional: Change the text color */
+    }
+
+    .who-we-are p {
+        font-size: 0.5rem; /* Adjust font size for better readability */
+        text-align: justify;
+    }
+
+    .certification-image-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .certificate-img {
+        width: 150%;
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .certificate-img img {
+        width: 60%;
+        height: 60%;
+        object-fit: contain;
+    }
+
+    .service-container {
+        flex-direction: row; /* Stack items vertically */
+        align-items: center; /* Center align items */
+    }
+
+    .service-image {
+        width: fit-content;
+    }
+
+    .service {
+        width: 30%; /* Full width for smaller screens */
+        height: 250px; /* Auto height for flexibility */
+        margin-bottom: 5px; /* Space between service items */
+    }
+
+    .service h3 {
+        font-size: 0.6rem;
+    }
+
+    .service p {
+        font-size: 0.5rem;
+    }
+
+    .faq-container {
+        flex-direction: column; /* Stack on smaller screens */
+    }
+
+    .faq-container, .contact-us-container {
+        margin: 0; /* Remove left/right margins */
+        margin-bottom: 20px; /* Space between stacked items */
+    }
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+    .service-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center align items */
+    }
+
+    .service {
+        width: calc(50% - 20px); /* Two items per row */
+        height: auto; /* Auto height for flexibility */
+        margin-bottom: 20px; /* Space between service items */
+    }
+
+    .faq-container {
+        flex-direction: column; /* Stack on smaller screens */
+    }
+
+    .faq-container, .contact-us-container {
+        margin: 0; /* Remove left/right margins */
+        margin-bottom: 20px; /* Space between stacked items */
+    }
+
+    .footer {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        height: 50px; /* Adjust height for tablets */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1279px) {
+    .service-container {
+        flex-wrap: wrap; /* Allow wrapping on medium-sized screens */
+        justify-content: space-between; /* Space items evenly */
+    }
+
+    .service {
+        width: calc(33% - 20px); /* Three items per row */
+    }
+
+    .faq-container {
+        flex-direction: column; /* Stack on smaller screens */
+    }
+
+    .faq-container, .contact-us-container {
+        margin: 0; /* Remove left/right margins */
+        margin-bottom: 20px; /* Space between stacked items */
+    }
+
+    .footer {
+        font-size: 1rem; /* Adjust font size for desktop */
+        padding: 1rem;
+    }
+}
+
+
