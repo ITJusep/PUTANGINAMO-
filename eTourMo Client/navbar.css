@@ -46,7 +46,7 @@ body {
     border-radius: 15px;
     position: fixed;
     top: 10%;
-    z-index: 1000;
+    z-index: 500;
     overflow: hidden;
   }
   

@@ -259,8 +259,11 @@ if (isset($_GET['package_id'])) {
         border: 1px solid #888;
         width: 60%;
         box-sizing: border-box;
-        /* max-width: 800px; */
+        max-height: 50vh;
+        max-width: 800px;
         border-radius: 10px;
+        z-index: 1000;
+        overflow-y: auto;
     }
 
     .modal-content img {
