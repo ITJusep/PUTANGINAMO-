@@ -1,4 +1,36 @@
 <?php
+require 'vendor/autoload.php';
+use Mailgun\Mailgun;
+
+// First, instantiate the SDK with your API credentials
+$mg = Mailgun::create('d8a0a6cf9fda3c63edca83df27d26992-c02fd0ba-6d872039'); // For US servers
+
+
+// Now, compose and send your message.
+// $mg->messages()->send($domain, $params);
+$mg->messages()->send('sandboxc7ab94cdcd654c8d91afc9e3faa998c7.mailgun.org', [
+  'from'    => 'etourmotravelandtours.otp@gmail.com',
+  'to'      => 'etourmotravelandtours.otp@gmail.com',
+  'subject' => 'The PHP SDK is awesome!',
+  'text'    => "<h1>Testing HTML</h1>"
+]);
+
+// Your Account SID and Auth Token from console.twilio.com
+$sid = "AC3c6b09bc39d086e1cd5aa874eb065691";
+$token = "751a01849deff192f2f4f4eb4882b34c";
+$client = new Twilio\Rest\Client($sid, $token);
+
+// Use the Client to make requests to the Twilio REST API
+$client->messages->create(
+    // The number you'd like to send the message to
+    '+639218576738',
+    [
+        // A Twilio phone number you purchased at https://console.twilio.com
+        'from' => '+13302497241',
+        // The body of the text message you'd like to send
+        'body' => "Hey Jenny! Good luck on the bar exam!"
+    ]);
+
 // Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();

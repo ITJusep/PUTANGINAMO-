@@ -4,6 +4,47 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();  // Start the session if not already started
 }
 
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "etourmodb";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_SESSION['user_id'])) {
+    // Assuming you have a valid database connection in $conn
+    $user_id = $_SESSION['user_id'];
+
+    // Prepared statement to prevent SQL injection
+    $sql = "SELECT firstname FROM user_profiles WHERE user_id = ?";
+    
+    // Prepare the query
+    if ($stmt = $conn->prepare($sql)) {
+        // Bind the user_id parameter to the query
+        $stmt->bind_param("i", $user_id); // 'i' denotes an integer parameter
+        
+        // Execute the query
+        $stmt->execute();
+
+        // Bind result variables
+        $stmt->bind_result($firstname);
+
+        // Close the statement
+        $stmt->close();
+    } else {
+        // If there was an issue preparing the statement
+        echo "Error preparing the query.";
+    }
+} else {
+    echo "No user ID found in the session.";
+}
+
 // Navbar links as an array
 $navLinks = [
     'Packages' => 'package.php',
@@ -22,10 +63,11 @@ if ($isLoggedIn) {
     $userEmail = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : 'User';
     
     // Add the Welcome message as a clickable link to the customer profile page
-    $navLinks['Welcome back, ' . $userEmail] = 'customer.php'; // Display welcome message with email
+    $navLinks['Welcome back, ' . $firstname] = 'customer.php'; // Display welcome message with email
     
     // Add the Logout link
     $navLinks['Logout'] = 'logout.php';
+
 } else {
     // If not logged in, show Login/Signup link
     $navLinks['Login / Signup'] = 'loginsignup.php';
@@ -115,3 +157,9 @@ body {
         ?>
     </ul>
 </nav>
+
+
+<?php
+// Close the database connection
+$conn->close();
+?>
