@@ -1,5 +1,13 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
+
+$env = parse_ini_file('.env');
+
+
+$sid = $env["TWILIO_SID"];
+$token = $env["TWILIO_TOKEN"];
+$client = new Twilio\Rest\Client($sid, $token);
 
 if (!isset($_SESSION['admin_id'])) {
     die("You must be logged in to manage bookings.");
@@ -30,6 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['booking_id']) && isset($
         $sql = "UPDATE bookings SET booking_status = 'confirmed', admin_id = ? WHERE booking_id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$admin_id, $booking_id]);
+
+        // Use the Client to make requests to the Twilio REST API
+        $client->messages->create(
+            // The number you'd like to send the message to
+            '+639218576738',
+            [
+                // A Twilio phone number you purchased at https://console.twilio.com
+                'from' => '+13302497241',
+                // The body of the text message you'd like to send
+                'body' => "Your booking payment has been confirmed. - eTourMo"
+            ]);
+
     } elseif ($action === 'done') {
         $sql = "UPDATE bookings SET booking_status = 'done', admin_id = ? WHERE booking_id = ?";
         $stmt = $pdo->prepare($sql);
@@ -38,6 +58,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['booking_id']) && isset($
         $sql = "UPDATE bookings SET booking_status = 'declined', admin_id = ? WHERE booking_id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$admin_id, $booking_id]);
+
+        // Use the Client to make requests to the Twilio REST API
+        $client->messages->create(
+            // The number you'd like to send the message to
+            '+639218576738',
+            [
+                // A Twilio phone number you purchased at https://console.twilio.com
+                'from' => '+13302497241',
+                // The body of the text message you'd like to send
+                'body' => "Your booking has been declined. Please check your account for more details. - eTourMo"
+            ]);
     } elseif ($action === 'undo') {
         $sql = "UPDATE bookings SET booking_status = 'pending', admin_id = ? WHERE booking_id = ?";
         $stmt = $pdo->prepare($sql);
@@ -153,7 +184,7 @@ $booking_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </form>
 
 <!-- Bookings Table -->
-<div class="content">
+<div class="content" >
     <?php if ($booking_data): ?>
         <table class="table table-lg text-black">
             <thead>
@@ -175,8 +206,6 @@ $booking_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <a href="?booking_id=<?php echo $booked['booking_id']; ?>&action=confirm" class="confirm-link text-green-500 font-bold">Confirm</a>
                                 <span class="divider divider-horizontal divider-neutral"></span>
                                 <a href="?booking_id=<?php echo $booked['booking_id']; ?>&action=decline" class="decline-link text-red-500 font-bold">Decline</a>
-                                <span class="divider divider-horizontal divider-neutral"></span>
-                                <a href="?booking_id=<?php echo $booked['booking_id']; ?>&action=done" class="done-link text-blue-500 font-bold">Done</a>
                             <?php else: ?>
                                 <a href="?booking_id=<?php echo $booked['booking_id']; ?>&action=undo" class="done-link text-blue-500 font-bold">Undo</a>
                             <?php endif ?>

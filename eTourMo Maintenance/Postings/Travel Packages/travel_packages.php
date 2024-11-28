@@ -90,6 +90,7 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include('../../Components/header.php'); ?>
 <!-- Upload Button (on the right side of the screen) -->
  <div class="content">
+ <h2 class="text-6xl font-bold mb-4 text-black">Manage Packages</h2>
 
  <form class="search-form" method="GET" action="">
     <div class="join">
@@ -122,7 +123,7 @@ $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $package['package_location']; ?></td>
                     <td><?php echo number_format($package['package_price'], 0, '.', ','); ?></td>
                     <td><?php echo $package['package_category']; ?></td>
-                    <td class="underline"><a href="/eTourMo Maintenance/Postings/Travel Packages/detail.php?id=<?php echo $package['package_id']; ?>">View</a></td>
+                    <td class="underline"><a href="/eTourMo Maintenance/Postings/Travel Packages/detail.php?id=<?php echo $package['package_id']; ?>">Edit</a></td>
                 </tr> 
             <?php endforeach; ?> 
         </tbody>
@@ -235,7 +236,7 @@ body {
     padding: 0;
     margin-left: 150px;
     background-color: #F3F3E0;
-    height: 1000px;
+    height: 1040px;
     padding: 100px;
 }
 

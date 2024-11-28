@@ -354,7 +354,7 @@ if (isset($_GET['package_id'])) {
                     echo "<div class='font-bold text-gray-600'><i class='fa-solid fa-location-pin'></i> {$row['package_location']}</div>";
                     echo "<div class='text-2xl font-bold text-green-500'>₱" . number_format($row['package_price'], 2) . "</div>";
                     echo "<div class='card-actions justify-end'>";
-                    echo "<a href='?package_id={$row['package_id']}' class='btn btn-primary w-full'>Book Now</a>";
+                    echo "<a href='?package_id={$row['package_id']}' class='btn btn-primary w-full'>Book</a>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";

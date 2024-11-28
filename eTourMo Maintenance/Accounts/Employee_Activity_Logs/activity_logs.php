@@ -22,12 +22,12 @@ $result = $conn->query($sql);
 ?>
 
 <?php include('../../Components/header.php'); ?>
+<h2 class="text-6xl font-bold mb-4 text-black">Activity Logs</h2>
 <div class="content">
 <!-- Table with custom CSS classes -->
-<table class="activity-log-table">
+<table class="table table-lg text-black mt-12"  >
     <thead>
-        <tr>
-            <th>Log ID</th>
+        <tr class="bg-[#608BC1] text-black">
             <th>Admin ID</th>
             <th>Full Name</th>
             <th>User Type</th>
@@ -42,7 +42,6 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // Output data of each row
             while($row = $result->fetch_assoc()) {
-                $log_id = $row["log_id"];
                 $admin_id = htmlspecialchars($row["admin_id"]);
                 $first_name = htmlspecialchars($row["first_name"]);
                 $last_name = htmlspecialchars($row["last_name"]);
@@ -73,7 +72,6 @@ $result = $conn->query($sql);
 
                 // Display the row in the table
                 echo "<tr>
-                        <td>" . $log_id . "</td>
                         <td>" . $admin_id . "</td>
                         <td>" . $first_name . " " . $last_name . "</td>
                         <td>" . $user_type . "</td>
@@ -96,15 +94,27 @@ $conn->close();
 <?php include('../../Components/footer.php'); ?>
 
 <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1040px;
+    padding: 100px;
+    overflow: hidden;
+    }
     .content{
-        margin-left: 280px;
+        margin-left: 10px;
+        overflow: scroll;
+        max-height: 800px;
     }
   /* Custom styles for the activity log table */
 .activity-log-table {
     width: 1000px;
     border-collapse: collapse;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 30px solid #ddd;
     margin: 20px auto; /* Centers the table horizontally */
 }
 
