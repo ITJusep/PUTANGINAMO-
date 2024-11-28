@@ -65,7 +65,8 @@ if (isset($_GET['booking_id'])) {
     b.booking_date,
     b.booking_total_price,
     b.booking_start,
-    b.booking_pax
+    b.booking_pax,
+    b.add_ons
 FROM bookings b
 WHERE b.booking_id = $booking_id";
     $bookingDetailsResult = $conn->query($bookingDetailsQuery);
@@ -76,7 +77,26 @@ WHERE b.booking_id = $booking_id";
 
 $imageData = base64_encode($packageDetails['image_data']);
 $imageType = $packageDetails['image_type'];
+$addOns = json_decode($bookingDetails['add_ons'], true);
 
+$addOnsListName = [];
+$addOnsListPrice = [];
+
+foreach ($addOns as $addOn) {
+    $addOnDetailsQuery = "SELECT 
+    a.addon_id,
+    a.package_id,
+    a.addon_name,
+    a.price
+FROM add_ons a
+WHERE a.addon_id = $addOn";
+    $addOnDetailsResult = $conn->query($addOnDetailsQuery);
+    if ($addOnDetailsResult->num_rows > 0) {
+        $addOnDetails = $addOnDetailsResult->fetch_assoc();
+        array_push($addOnsListName, $addOnDetails["addon_name"]);
+        array_push($addOnsListPrice, $addOnDetails["price"]);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,6 +138,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                     <p><strong>Booking Date:</strong> <?php echo nl2br($bookingDetails['booking_date']); ?></p>
                     <p><strong>Booking Start:</strong> <?php echo nl2br($bookingDetails['booking_start']); ?></p>
                     <p><strong>Number of Passengers:</strong> <?php echo nl2br($bookingDetails['booking_pax']); ?></p>
+                    <p><strong>Add Ons:</strong></p>
+                    <ul>
+
+                        <?php
+                            for ($i = 0; $i < count($addOnsListPrice); $i++) {
+                                echo "<li>" . $addOnsListName[$i] . " - " . $addOnsListPrice[$i] . "</li>";
+                            }
+                        ?>
+                    </ul>
                     <p><strong>Total Price:</strong> <?php echo nl2br($bookingDetails['booking_total_price']); ?></p>
                 </div>
 

@@ -24,7 +24,7 @@ if ($result && $result->num_rows > 0) {
     $backgroundImage = $row['backdrop_image'];
 } else {
     // If no backdrop found, fallback to a default background image
-    $backgroundImage = file_get_contents('default-background.jpg'); // Provide a default image
+    // $backgroundImage = file_get_contents('default-background.jpg'); // Provide a default image
 }
 // Encode the image in base64 for embedding in CSS
 $backgroundImageBase64 = base64_encode($backgroundImage);
