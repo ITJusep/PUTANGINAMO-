@@ -133,16 +133,6 @@ if ($logged_in_user_id !== 'Guest') {
             </div>
         </div>
 
-        <!-- Inquiries Submenu -->
-        <div class="has-submenu">
-            <a href="javascript:void(0);" class="<?= ($current_page == 'testimonials' || $current_page == 'messages' || $current_page == 'trip_planner') ? 'active' : '' ?>">Inquiries</a>
-            <div class="submenu">
-                <a href="/eTourMo Maintenance/Inquiry/Testimonial/testimonials.php" class="<?= ($current_page == 'testimonials') ? 'active' : '' ?>">Testimonial</a>
-                <a href="/eTourMo Maintenance/Inquiry/Messages/messages.php" class="<?= ($current_page == 'messages') ? 'active' : '' ?>">Messages</a>
-                <a href="/eTourMo Maintenance/Inquiry/Trip Planner/trip_planner.php" class="<?= ($current_page == 'trip_planner') ? 'active' : '' ?>">Trip Planner</a>
-            </div>
-        </div>
-
         <a href="javascript:void(0);" onclick="logout()" class="logout-link">Logout</a>
     </nav>
 </aside>

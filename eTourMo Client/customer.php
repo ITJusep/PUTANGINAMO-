@@ -123,6 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Error canceling booking: " . $stmt->error;
         }
     }
+
+    if (isset($_POST['paynow_booking'])) {
+            header("Location: paynow.php"); // Redirect to reload the page with updated booking status
+            exit();
+    }
 }
 
 $conn->close();
@@ -276,7 +281,9 @@ th {
                             <?php if ($booking['booking_status'] !== 'Confirmed' && $booking['booking_status'] !== 'Done' && $booking['booking_status'] !== 'Declined') : ?>
                                 <form method="POST" action="customer.php">
                                     <input type="hidden" name="booking_id" value="<?= $booking['booking_id'] ?>">
-                                    <button type="submit" name="cancel_booking">Cancel</button>
+                                    <button type="submit" name="cancel_booking">Cancel</button> |
+                                    <button type="submit" name="paynow_booking">Pay Now</button> 
+
                                 </form>
                             <?php endif; ?>
                         </td>

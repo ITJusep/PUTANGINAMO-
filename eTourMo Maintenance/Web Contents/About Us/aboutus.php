@@ -356,9 +356,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <?php include('../../Components/header.php'); ?>
 <div class="content py-6">
+<h2 class="text-6xl font-bold mb-4 text-black mb-4">Manage About Us</h2>
     <!-- Upload Form Section -->
     <div id="uploadForm" class="upload-form">
-    <h2 class="text-6xl font-bold mb-4 text-black mb-4">Update About Us</h2>
     <!-- Company Images Section -->
     <div id="companyImagesForm" class="form-section">
         <!-- Upload and Delete Company Image Form -->
@@ -551,12 +551,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!-- Add the CSS styles below -->
 <style>
-    body {
-   background-color: #F3F3E0;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1040px;
+    padding: 100px;
 }
 
     .content{
+        overflow: scroll;
+        height: 900px;
         margin-left: 250px;
+        margin-top: -60px;
     }
 /* Center the entire form container */
 

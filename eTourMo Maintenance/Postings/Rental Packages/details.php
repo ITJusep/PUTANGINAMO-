@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="content">
 <!-- Back Button -->
 <div class="back-button-container">
-    <button type="button" class="back-button" onclick="window.location.href='rental.php';">
+    <button type="button" class="btn btn-info w-20 ml" style="margin-left: 220px;" onclick="window.location.href='rental.php';">
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5"></path>
             <path d="M12 5l-7 7 7 7"></path>
@@ -208,12 +208,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!-- Styles applied to the form elements -->
 <style>
-.content{
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
-margin-left: 250px; 
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1040px;
+    padding: 100px;
 }
+
 /* Form container styles */
 .form-container {
     max-width: 920px; /* Maximum width of the form */
@@ -225,6 +229,7 @@ margin-left: 250px;
     display: block; /* Ensure it's block-level to prevent any inline behavior */
     height: 800px;
     overflow: scroll;
+    margin-top: -50px;
 }
 
 /* Form group styles */
@@ -288,50 +293,6 @@ margin-left: 250px;
     margin-top: 5px; /* Adjust margin between checkbox and image */
 }
 
-.back-button{
-    margin-left: 10px;
-}
-
-/* Back button container and its styles */
-.back-button-container {
-    text-align: left; /* Align the back button to the left */
-    margin-top: 20px;    /* Space at the top of the button container */
-}
-
-.back-button-container .back-button {
-    background-color: #007bff; /* Matching the main button's color */
-    color: white;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Same lifted shadow effect */
-}
-
-/* Hover effect for back button */
-.back-button-container .back-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Active effect for back button */
-.back-button-container .back-button:active {
-    background-color: #003c7a;
-    box-shadow: none;
-    transform: translateY(2px); /* "Pressed" effect */
-}
-
-/* Focus effect for back button */
-.back-button-container .back-button:focus {
-    outline: none; 
-    border: 2px solid #0056b3; /* Border and shadow on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light focus shadow */
-}
-
-/* Button group container styles */
-.button-group {
-    text-align: center;                 /* Center align buttons */
-    margin-top: 20px;                   /* Space at the top of the button group */
-}
 
 /* Additional form controls for better structure */
 form {

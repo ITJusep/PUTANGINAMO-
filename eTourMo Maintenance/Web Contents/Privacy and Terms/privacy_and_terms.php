@@ -100,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <?php include('../../Components/header.php'); ?>
 <div class="content">
+<h2 class="text-6xl font-bold mb-9 text-black mb-4">Manage Privacy & Terms</h2>
 <!-- Privacy Policy Section -->
 <div id="privacyPolicyForm" class="agreement-section">
     <h2>Privacy Policy</h2>
@@ -155,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <style>
 body {
     background-color: #F3F3E0;
-    height: 1000px;
+    height: 1040px;
     padding: 100px;
     color: black;
 }
