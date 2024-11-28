@@ -6,6 +6,7 @@
     <title>eTourMo Travel and Tours</title>
     <link rel="stylesheet" href="AboutUs.css">
 
+
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" 
@@ -15,7 +16,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     <style>
     .main-content {
     position: inherit;
-    padding: 20px;
+    padding: 0px;
     flex-grow: 1; /* Ensure the main content takes up available space */
     box-sizing: border-box;
     }

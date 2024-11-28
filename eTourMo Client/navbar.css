@@ -1,0 +1,200 @@
+/* navbar.css */
+/* path: C:\xampp\htdocs\eTourMo Client\navbar.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin-top: 0px;
+    padding-top: 0% !important;
+  }
+  
+  .navbar .logo {
+    display: flex; /* Ensures proper alignment of the image */
+    align-items: center; /* Center the logo vertically */
+    height: 100%; /* Match the navbar height */
+  }
+  
+  .navbar .logo img {
+    height: 50px; /* Desired logo height */
+    max-height: 100%; /* Ensure it doesn’t exceed navbar height */
+    object-fit: contain; /* Maintain aspect ratio */
+    display: block;
+  }
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0px;
+  }
+  
+  .navbar ul li {
+    margin: 0 20px;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 90%;
+    padding: 15px 30px;
+    background-color: burlywood;
+    border-radius: 15px;
+    position: fixed;
+    top: 10%;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  /* Main navigation links */
+  .navbar .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding-top: 0;
+    position: fixed; /* Position it relative to navbar */
+    left: 50%; /* Align to the center */
+    transform: translateX(-50%); /* Adjust for perfect centering */
+    flex-grow: 1; /* Make this take up remaining space */
+    justify-content: center; /* Center the links */
+    white-space: nowrap; /* Prevent text from stacking */
+    z-index: 100;
+  }
+  
+  /* Ensure the navbar links only take the space of the text for nav-links */
+  .navbar .nav-links li a {
+    position: relative; /* To position the pseudo-element relative to the link */
+    text-decoration: none;
+    color: #333; /* Default text color */
+    font-weight: normal; /* Default font weight */
+    display: relative; /* Only take up the width of the text */
+    transition: color 0.3s, text-decoration 0.3s; /* Smooth transition */
+    padding-bottom: 5px; /* Add some space for the underline effect */
+    z-index: 100;
+  }
+  
+  /* Active page styling for nav-links */
+  .navbar .nav-links li a.active {
+    color: #007bff; /* Highlight active link color */
+    font-weight: bold; /* Bold font for active link */
+  }
+  
+  /* Hover effect for nav-links */
+  .navbar .nav-links li a:hover {
+    color: #0056b3; /* Slightly darker shade for hover effect */
+    text-decoration: none; /* Remove default underline on hover */
+  }
+  
+  /* The ::after pseudo-element for underline effect for nav-links */
+  .navbar .nav-links li a::after {
+    content: ""; /* Create the pseudo-element */
+    position: absolute;
+    bottom: 0; /* Position just below the text */
+    left: 50%; /* Start from the center of the text */
+    width: 0; /* Initially set the width to 0 */
+    height: 2px; /* Set the underline thickness */
+    background-color: #007bff; /* Underline color */
+    transition: width 0.3s ease, left 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Hover state for the underline effect for nav-links */
+  .navbar .nav-links li a:hover::after {
+    width: 100%; /* Extend the width to 100% on hover */
+    left: 0; /* Move the starting point to the left (align it with the text) */
+  }
+  
+  /* User links container - vertically stack links */
+  .user-links {
+    display: flex;
+    flex-direction: row; /* Stack the user links vertically */
+    justify-content: flex-end; /* Align user links to the right */
+    padding: 0; /* Remove all padding */
+    position: relative;
+    width: 90%; /* Make the container take up the full width of its parent */
+    margin-right: -10px; /* Push the container more to the right */
+    white-space: nowrap; /* Prevent text from stacking */
+    gap: 0%;
+    font-size: 0.8rem;
+    overflow: hidden;
+  }
+  
+  /* User links list */
+  .user-links ul {
+    list-style: none;
+    margin: 0; /* No margin around the list */
+    padding: 0; /* No padding for the list */
+    display: flex;
+    flex-direction: row; /* Stack the user links vertically */
+    align-items: center; /* Align the links to the left within the container */
+    gap: 10px; /* Ensure no gap between the rows */
+  }
+  
+  /* Style for user links items */
+  .user-links ul li {
+    margin: 0; /* Remove margin between rows */
+    padding: 0; /* Remove padding from individual list items */
+    display: block;
+  }
+  
+  /* Style for user links text */
+  .user-links ul li a {
+    text-decoration: none;
+    font-weight: normal;
+  }
+  
+  /* Active state for user-specific links */
+  .user-links ul li a.active {
+    color: #007bff; /* Highlight active link color */
+    font-weight: bold;
+  }
+  
+  /* Hover effect for user links */
+  .user-links ul li a:hover {
+    color: #0056b3; /* Slightly darker shade for hover effect */
+  }
+  
+  .user-links ul li:first-child {
+    margin-right: auto; /* Push the first link to the far right */
+  }
+  
+  /* Apply specific styles for logout link */
+  .user-links ul li a.logout-link {
+    position: relative; /* To position the tooltip */
+    text-decoration: none;
+    font-size: 18px !important;
+    color: #333;
+    padding: 0px;
+    transition: color 0.3s;
+  }
+  
+  /* Show tooltip on hover for logout icon only */
+  .user-links ul li a.logout-link:hover {
+    color: #007bff;
+  }
+  
+  .user-links ul li a.logout-link:hover::after {
+    content: "Logout"; /* Text that appears on hover */
+    position: absolute;
+    bottom: 120%; /* Position the tooltip above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    visibility: hidden; /* Initially hidden */
+  }
+  
+  .user-links ul li a.logout-link:hover::after {
+    opacity: 1;
+    visibility: visible; /* Make it visible on hover */
+  }
+  
