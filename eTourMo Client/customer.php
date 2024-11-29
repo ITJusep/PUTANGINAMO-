@@ -134,75 +134,159 @@ $conn->close();
 ?>
 
 <style>
-html, body {
-  height: 100%;
+body {
+  height: 1040px;
   margin: 0;
-  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  overflow:hidden;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 50px;
+/* Container for both elements */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
 }
 
 .UserProfile-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 500px;
+  margin-top:20px;
+  margin-left:20px;
+  overflow:scroll;
+  height:300px
 }
 
 .UserProfile-main {
-  width: 50%;
-  padding: 10px;
+  width: 60%; /* Increased width for profile section */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100px
 }
 
 .UserProfile-info-container {
-  text-align: center;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  margin-top: 20px;
-  margin-left: 10px;
+  background-color: #fafafa;
+  margin-bottom: 20px;
+}
+
+.UserProfile-info-container h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.UserProfile-info-item {
+  margin-bottom: 15px;
+}
+
+.UserProfile-info-item input,
+.UserProfile-info-item button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 1em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.UserProfile-info-item input:focus,
+.UserProfile-info-item button:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.update-profile-button,
+.change-password-button,
+.delete-account-button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-profile-button:hover,
+.change-password-button:hover,
+.delete-account-button:hover {
+  background-color: #0056b3;
+}
+
+.booking-history-container {
+  width: 700px; /* Adjusted width for better layout */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left:-90px;
+  overflow:scroll;
+  height: 300px;
+  margin-top:20px;
+}
+
+.booking-history-container h3 {
+  margin-bottom: 15px;
+  font-size: 1.2em;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
-table, th, td {
+th, td {
+  padding: 12px;
+  text-align: center;
   border: 1px solid #ddd;
-  padding: 8px;
 }
 
 th {
   background-color: #f4f4f4;
+  font-weight: bold;
 }
 
-.booking-history-container {
-  width: 45%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-left: 20px;
-  text-align: center;
+td {
+  font-size: 0.9em;
 }
 
-.booking-history-container table {
-  margin-top: 20px;
-  width: 100%;
-  border-collapse: collapse;
+td button {
+  padding: 8px 15px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+td button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .UserProfile-main, .booking-history-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
 </style>
 
 <?php include('header.php'); ?>
 <div class="content">
+<?php include('./carousel/carousel.php'); ?>
+<div class="container">
     <div class="UserProfile-container">
         <!-- User Profile Section -->
-        <div class="UserProfile-main">
             <div class="UserProfile-info-container">
                 <form method="POST" action="customer.php">
                     <div class="UserProfile-info-row">
@@ -249,9 +333,8 @@ th {
                     </div>
                 </form>
             </div>
-        </div>
-
-        <!-- Booking History Section -->
+    </div>
+    <!-- Booking History Section -->
         <div class="booking-history-container">
             <h3>Your Booking History</h3>
             <table>

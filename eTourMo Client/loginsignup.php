@@ -256,10 +256,10 @@ function signup($conn)
 ?>
 <style>
 /* General body styling to ensure the page takes full height */
-body, html {
+body{
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -274,27 +274,28 @@ body, html {
 .form-container {
     width: 500px;
     max-width: 800px;  /* Increased max-width for wider forms */
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 15px;
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 90vh; /* Ensure the form container does not exceed 90% of viewport height */
+    max-height: 90px; /* Ensure the form container does not exceed 90% of viewport height */
     overflow: hidden;  /* Prevent any internal scrolling */
     margin-top: 0; /* Remove margin to ensure it stays centered */
     box-sizing: border-box;
-    margin-top: 100px;
-    height: 450px;
+    margin-top: 10px;
+    height: 75vh;
+    max-height:350px;
     overflow: auto; /* Prevent page scrolling */
+    margin-left:30%;
 }
 
 /* Header style for each form */
 .form-container h2 {
     text-align: center;
-    margin-bottom: 20px;
 }
 
 /* General styles for form elements */
@@ -362,9 +363,14 @@ body, html {
         font-size: 1.5em;
     }
 }
+
+.loginForm {
+    max-height: 10px;
+}
 </style>
 
 <?php include('header.php'); ?>
+<?php include('./carousel/carousel.php'); ?>
 
 <div class="form-container">
     <!-- Login Form -->
@@ -388,10 +394,10 @@ body, html {
         <div class="toggle-btn">
             <p>Don't have an account? <a href="javascript:void(0)" onclick="toggleForms()">Sign up here</a></p>
         </div>
-        <div class="toggle-btn">
+        <!--<div class="toggle-btn">
             <p><a href="javascript:void(0)" onclick="toggleForgotPasswordForm()">Forgot Password?</a></p>
         </div>
-        <div id="errorMessage" class="error-message"></div>
+        <div id="errorMessage" class="error-message"></div>-->
     </div>
 
     <!-- Sign-Up Form -->

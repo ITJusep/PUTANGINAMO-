@@ -8,7 +8,6 @@ if (session_status() == PHP_SESSION_NONE) {
 $navLinks = [
     'Packages' => 'package.php',
     'Transportation' => 'transportation.php',
-    'Trip Planner' => 'trip_planner.php',
     'Testimonials' => '#',
     'About Us' => 'about.php'
 ];

@@ -97,9 +97,9 @@ if ($logged_in_user_id !== 'Guest') {
     </div>
     <nav class="nav" role="navigation">
         <!-- Dashboard Submenu -->
-        <a href="/eTourMo Maintenance/Dashboard/reports.php" class="<?= ($current_page == 'reports') ? 'active' : '' ?>">Dashboard</a>
-
         <a href="/eTourMo Maintenance/Bookings/bookings.php" class="<?= ($current_page == 'bookings') ? 'active' : '' ?>">Bookings</a>
+
+        <a href="/eTourMo Maintenance/Dashboard/reports.php" class="<?= ($current_page == 'reports') ? 'active' : '' ?>">Reports</a>
         
         <!-- Web Contents Submenu -->
         <div class="has-submenu">
