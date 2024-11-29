@@ -108,14 +108,14 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php endif; ?>
 
 <!-- Modal for Upload Rental Form -->
-<div id="uploadModal" class="modal">
+<div id="uploadModal" class="custom-modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Upload Rental</h2>
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="rental_type">Rental Type:</label>
-                <select name="rental_type" required>
+                <select name="rental_type" class="select select-bordered w-full max-full bg-[#CBDCEB] text-black"required>
                     <option value="car">Car</option>
                     <option value="bus">Bus</option>
                     <option value="van">Van</option>
@@ -179,17 +179,7 @@ body {
     height: 1000px;
     padding: 100px;
 }
-/* Form container */
-.search-form {
-max-width: 28rem; /* max-w-md */
-margin: 0 auto;   /* mx-auto */
-}
-.content{
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    margin-left: 250px;
-}
+
 /* Header */
 h1 {
     text-align: center;
@@ -253,8 +243,8 @@ h1 {
 }
 
 /* Modal styles */
-.modal {
-    display: none;  /* Initially hidden */
+.custom-modal {
+    display: none;  /* Ensure modal is hidden by default */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -262,9 +252,10 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    display: flex;  /* Flex to center modal */
+    display: flex;  /* Flexbox for centering */
     justify-content: center;
     align-items: center;
+    margin-left: 100px;
 }
 
 .modal-content {
@@ -273,6 +264,8 @@ h1 {
     border-radius: 8px;
     width: 90%;
     max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto; /* Make the modal content scrollable if necessary */
 }
 
 .close {

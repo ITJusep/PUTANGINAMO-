@@ -1,9 +1,3 @@
-<?php
-// Static privacy policy and terms conditions content
-$privacyPolicy = "This is a static Privacy Policy. Replace this text with the actual privacy policy content.";
-$termsCondition = "This is a static Terms and Conditions. Replace this text with the actual terms and conditions content.";
-?>
-
 <style>
     /* Footer styling to make it stick to the bottom */
     .footer-container {
@@ -103,6 +97,8 @@ $termsCondition = "This is a static Terms and Conditions. Replace this text with
         max-width: 100%;
         box-sizing: border-box;
         overflow: hidden;
+        min-height: 40vh;
+        max-height: 40vh;
     }
 
     .privacy-policy-container h3,
@@ -126,77 +122,9 @@ $termsCondition = "This is a static Terms and Conditions. Replace this text with
     </div>
 
     <div class="footer-links">
-        <span id="privacy-policy-link" class="privacy-policy-link">Privacy Policy</span>
+        <a href="privacy_policy.php" class="privacy-policy-link">Privacy Policy</a>
         |
-        <span id="terms-and-conditions-link" class="terms-and-conditions-link">Terms and Conditions</span>
+        <a href="terms_conditions.php" class="terms-and-conditions-link">Terms and Conditions</a>
     </div>
 </footer>
 
-<!-- Privacy Policy Modal -->
-<div id="privacy-policy-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="close-privacy-policy-modal">&times;</span>
-        <div class="privacy-policy-container">
-            <h3>Privacy Policy</h3>
-            <div class="privacy-policy-detail">
-                <p>
-                    <?php echo nl2br(htmlspecialchars($privacyPolicy)); ?>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Terms and Conditions Modal -->
-<div id="terms-and-conditions-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="close-terms-and-conditions-modal">&times;</span>
-        <div class="terms-and-conditions-container">
-            <h3>Terms and Conditions</h3>
-            <p>
-                <?php echo nl2br(htmlspecialchars($termsCondition)); ?>
-            </p>
-        </div>
-    </div>
-</div>
-
-<script>
-// Modal functionality
-const privacyPolicyLink = document.getElementById("privacy-policy-link");
-const termsConditionsLink = document.getElementById("terms-and-conditions-link");
-
-const privacyPolicyModal = document.getElementById("privacy-policy-modal");
-const termsConditionsModal = document.getElementById("terms-and-conditions-modal");
-
-const closePrivacyPolicyModal = document.getElementById("close-privacy-policy-modal");
-const closeTermsConditionsModal = document.getElementById("close-terms-and-conditions-modal");
-
-// Open Privacy Policy modal
-privacyPolicyLink.onclick = function() {
-    privacyPolicyModal.style.display = "block";
-};
-
-// Open Terms and Conditions modal
-termsConditionsLink.onclick = function() {
-    termsConditionsModal.style.display = "block";
-};
-
-// Close Privacy Policy modal
-closePrivacyPolicyModal.onclick = function() {
-    privacyPolicyModal.style.display = "none";
-};
-
-// Close Terms and Conditions modal
-closeTermsConditionsModal.onclick = function() {
-    termsConditionsModal.style.display = "none";
-};
-
-// Close modals if clicked outside of the modal content
-window.onclick = function(event) {
-    if (event.target === privacyPolicyModal) {
-        privacyPolicyModal.style.display = "none";
-    } else if (event.target === termsConditionsModal) {
-        termsConditionsModal.style.display = "none";
-    }
-};
-</script>

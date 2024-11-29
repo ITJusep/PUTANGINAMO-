@@ -129,24 +129,28 @@ $conn->close();
 ?>
 
 <style>
-html, body {
-  height: 100%;
+body {
+  height: 1040px;
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
+  overflow:hidden;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  margin-top: 50px;
+/* Container for both elements */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
 }
 
 .UserProfile-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 500px;
+  margin-top:20px;
+  margin-left:20px;
+  overflow:scroll;
+  height:300px
 }
 
 .UserProfile-main {
@@ -155,6 +159,7 @@ html, body {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 100px
 }
 
 .UserProfile-info-container {
@@ -206,11 +211,15 @@ html, body {
 }
 
 .booking-history-container {
-  width: 35%; /* Adjusted width for better layout */
+  width: 700px; /* Adjusted width for better layout */
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left:-90px;
+  overflow:scroll;
+  height: 300px;
+  margin-top:20px;
 }
 
 .booking-history-container h3 {
@@ -269,9 +278,10 @@ td button:hover {
 
 <?php include('header.php'); ?>
 <div class="content">
+<?php include('./carousel/carousel.php'); ?>
+<div class="container">
     <div class="UserProfile-container">
         <!-- User Profile Section -->
-        <div class="UserProfile-main">
             <div class="UserProfile-info-container">
                 <form method="POST" action="customer.php">
                     <div class="UserProfile-info-row">
@@ -318,9 +328,8 @@ td button:hover {
                     </div>
                 </form>
             </div>
-        </div>
-
-        <!-- Booking History Section -->
+    </div>
+    <!-- Booking History Section -->
         <div class="booking-history-container">
             <h3>Your Booking History</h3>
             <table>
