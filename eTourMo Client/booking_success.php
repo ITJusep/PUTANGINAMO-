@@ -125,9 +125,26 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     <canvas id="confetti-holder" class="absolute top-0 left-0 pointer-events-none"></canvas>
     <main class="w-screen h-screen flex justify-center items-center">
         <section class="w-3/4 shadow-md p-6 bg-white text-black">
+        <div class="image-grid grid grid-cols-8 gap-4 mb-4">
+                    <img src="/Payment Method QR/billease.png" alt="Image 1" width="700" class="mx-auto">
+                    <img src="/Payment Method QR/gcash.png" alt="Image 2" width="700" class="mx-auto">
+                    <img src="/Payment Method QR/mastercard.png" alt="Image 3"  width="700" class="mx-auto">
+                    <img src="/Payment Method QR/maya.png" alt="Image 4" width="700" lass="mx-auto">
+                    <img src="/Payment Method QR/multiplecard.png" alt="Image 5" width="700" class="mx-auto">
+                    <img src="/Payment Method QR/qrph.png" alt="Image 6" width="700" class="mx-auto">
+                    <img src="/Payment Method QR/shopeepay.png" alt="Image 7" width="700" class="mx-auto">
+                    <img src="/Payment Method QR/unionpay.png" alt="Image 8" width="700" class="mx-auto">
+                </div>
             <header class="mb-6 w-1/2 mx-auto text-center">
+                <!-- Image Grid -->
+                
+                <!-- Icon -->
                 <i class="fa-solid fa-circle-check fa-6x text-green-400"></i>
-                <h1 class="text-4xl font-semibold my-4">Your booking has been successfully confirmed!</h1>
+
+                <!-- Heading -->
+                <h1 class="text-4xl font-semibold my-4">Your booking is almost set!</h1>
+                
+                <!-- Paragraph -->
                 <p>Thank you for booking your tour with us! Your booking is confirmed, and we are looking forward to seeing you on the tour. A confirmation email has been sent with all the details.</p>
             </header>
 
@@ -181,9 +198,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 </div>
             </div>
             
-            <div class="flex justify-center">
-                <a href="/?package.php" class="btn btn-info mt-6">Back To Page</a>
+            <div class="flex justify-center gap-x-4">
+                <a href="/?package.php" class="btn btn-info mt-6">Back Page</a>
+                <a href="/?package.php" class="btn btn-info mt-6">Pay Now</a>
             </div>
+            <p style="text-align: center;">You can pay later once you close this and go to your booking history.</p>
         </section>
     </main>
 </body>

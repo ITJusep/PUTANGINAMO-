@@ -42,7 +42,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     padding: 0;
     margin-left: 150px;
     background-color: #F3F3E0;
-    height: 1000px;
+    height: 1040px;
     padding: 100px;
 }
 
@@ -219,8 +219,9 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.5);  /* dark:focus:ring-blue-800 */
     }
 }
-</style>
 
+</style>
+<h2 class="text-6xl font-bold mb-4 text-black text-center">Manage Customer Account</h2>
 <div class="content">
 <form class="search-form" method="GET" action="">
     <div class="search-container">

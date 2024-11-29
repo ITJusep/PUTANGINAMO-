@@ -1,4 +1,7 @@
 <?php
+require 'vendor/autoload.php';
+use Twilio\Rest\Client;
+
 session_start();
 
 // Database connection settings
@@ -184,6 +187,25 @@ function signup($conn)
     $contactInformation = $_POST['contactInformation'] ?? '';
 
     $error_message = ""; // Variable to store error messages
+
+    
+            // // twilio api send otp
+
+            $env = parse_ini_file('.env');
+            // Find your Account SID and Auth Token at twilio.com/console
+            // and set the environment variables. See http://twil.io/secure
+            $sid = $env["TWILIO_SID"];
+            $token = $env["TWILIO_TOKEN"];
+            $twilio = new Client($sid, $token);
+
+            $verification = $twilio->verify->v2
+                ->services("VAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+                ->verifications->create(
+                    $contactInformation, // To
+                    "sms" // Channel
+                );
+
+            print $verification->sid;
 
     // Sign-up functionality
     if (!empty($email) && !empty($password) && !empty($firstName) && !empty($lastName) && !empty($contactInformation) && !empty($confirmPassword)) {

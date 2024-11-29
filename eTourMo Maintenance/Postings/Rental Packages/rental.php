@@ -68,6 +68,8 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../../Components/header.php'); ?>
 <div class="content">
+<h2 class="text-6xl font-bold mb-4 text-black">Manage Rentals</h2>
+
 <!-- Upload Button (on the right side of the screen) -->
 <form class="search-form" method="GET" action="">
     <div class="join">
@@ -98,7 +100,7 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $rental['rental_type']; ?></td>
                     <td><?php echo $rental['rental_pax']; ?></td>
                     <td><?php echo number_format($rental['rental_price'], 0, '.', ','); ?></td>
-                    <td><a href="/eTourMo Maintenance/Postings/Rental Packages/details.php?id=<?php echo $rental['rental_id']; ?>">View</a></td>
+                    <td><a href="/eTourMo Maintenance/Postings/Rental Packages/details.php?id=<?php echo $rental['rental_id']; ?>">Edit</a></td>
                 </tr> 
             <?php endforeach; ?> 
         </tbody>
@@ -176,7 +178,7 @@ body {
     padding: 0;
     margin-left: 150px;
     background-color: #F3F3E0;
-    height: 1000px;
+    height: 1040px;
     padding: 100px;
 }
 

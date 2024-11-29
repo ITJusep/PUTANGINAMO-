@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="content">
 <!-- Back Button -->
 <div class="back-button-container">
-    <button type="button" class="btn btn-info w-20" onclick="window.location.href='travel_packages.php';">
+    <button type="button" class="btn btn-info w-20" style="margin-left: 220px;" onclick="window.location.href='travel_packages.php';">
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5"></path>
             <path d="M12 5l-7 7 7 7"></path>
@@ -268,12 +268,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!-- Styles applied to the form elements -->
 <style>
-.content{
+    body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    margin-left: 250px; 
+    margin-left: 150px;
+    background-color: #F3F3E0;
+    height: 1040px;
+    padding: 100px;
 }
+
 /* Form container styles */
 .form-container {
     max-width: 920px; /* Maximum width of the form */
@@ -285,6 +289,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     display: block; /* Ensure it's block-level to prevent any inline behavior */
     height: 800px;
     overflow: scroll;
+    margin-top: -50px;
 }
 
 /* Form group styles */
